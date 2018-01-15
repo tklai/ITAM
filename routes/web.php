@@ -11,11 +11,19 @@
 |
 */
 
+// Redirect the root page to login page
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 });
 
-Auth::routes();
+/*
+ * Show the login form and handle login/logout operation.
+ * Registration and Password Reset is disabled.
+ * Original code: Auth::routes();
+ */
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/admin', 'HomeController@index')->name('admin.index');
 
