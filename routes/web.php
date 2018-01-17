@@ -25,5 +25,14 @@ Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::get('/admin', 'AdminController@index')->name('admin.index');
+Route::get('admin', 'AdminController@index')->name('admin.index');
 
+Route::group(['prefix' => 'admin/department', 'middleware' => 'auth'], function() {
+    Route::view('/', 'admin.department.list')->name('department.index');
+    Route::view('add', 'admin.department.add')->name('department.add');
+    Route::get('list', 'DepartmentController@getList')->name('department.list');
+    Route::post('add', 'DepartmentController@postAdd');
+    Route::get('{id}/edit', 'DepartmentController@getEdit')->name('department.edit');
+    Route::put('{id}/edit', 'DepartmentController@putUpdate');
+    Route::post('{id}', 'DepartmentController@postDelete');
+});
