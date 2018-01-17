@@ -36,6 +36,7 @@
                     </div>
                 </li>
             </ul>
+            <ul class="d-md-none dropdown-divider"></ul>
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
                 <li class="nav-item">
