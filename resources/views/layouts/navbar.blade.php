@@ -1,7 +1,7 @@
 <!-- Responsive Navbar -->
 <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light" role="navigation">
     <div class="container">
-        <a class="navbar-brand d-none d-sm-block" href="#">IT Asset Management System</a>
+        <a class="navbar-brand d-none d-sm-block" href="/">IT Asset Management System</a>
         <a class="navbar-brand d-sm-none" href="#">ITAM System</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

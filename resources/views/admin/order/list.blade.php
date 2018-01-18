@@ -1,56 +1,16 @@
 @extends('layouts.list')
 
-@section('title', 'Order List')
-
-@section('customJS')
-    <script type="text/javascript">
-        window.actionEvents = {
-            'click #edit': function (e, value, row) {
-                window.location.assign('/admin/vendor/' + row['id'] + '/edit');
-            },
-
-            'click #delete': function (e, value, row) {
-                event.preventDefault();
-                $.ajax({
-                    url: `/admin/vendor/${row['id']}`,
-                    type: 'POST',
-                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                    beforeSend: function () {
-                        if (!confirm('Are you sure to delete the selected data?')) { return false; }
-                    },
-                    success: function () {
-                        $('.table').bootstrapTable('refresh');
-                    },
-                    error: function (response) {
-                        alert('Something happened wrong.');
-                        console.log(response);
-                    }
-                });
-            }
-        };
-
-        function phoneCall(value) {
-            return `<a href="tel:${value}">${value}</a>`;
-        }
-    </script>
-@endsection
+@section('title', 'Orders')
+@section('category', 'order')
 
 @section('table')
-    <div class="d-flex align-items-baseline mb-1">
-        <h4 class="mr-auto">Order</h4>
-        <a class="btn btn-primary mr-1" href="{{ route('order.add') }}" aria-label="create">
-            <span class="oi" data-glyph="plus"></span> Add
-        </a>
-        {{--<a class="btn btn-danger" href="" aria-label="delete">--}}
-        {{--<span class="oi" data-glyph="trash"></span> Delete--}}
-        {{--</a>--}}
-    </div>
     <table class="table" id="orderList"
            data-toggle="table"
            data-url="{{ route('order.list') }}"
            data-id-field="id"
            data-sort-name="deliveryDate"
            data-sort-order="desc"
+           data-mobile-responsive="true"
     >
         <thead>
         <tr>
