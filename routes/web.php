@@ -36,3 +36,13 @@ Route::group(['prefix' => 'admin/department', 'middleware' => 'auth'], function(
     Route::put('{id}/edit', 'DepartmentController@putUpdate');
     Route::post('{id}', 'DepartmentController@postDelete');
 });
+
+Route::group(['prefix' => 'admin/location', 'middleware' => 'auth'], function() {
+    Route::view('/', 'admin.location.list')->name('location.index');
+    Route::view('add', 'admin.location.add')->name('location.add');
+    Route::get('list', 'LocationController@getList')->name('location.list');
+    Route::post('add', 'LocationController@postAdd');
+    Route::get('{id}/edit', 'LocationController@getEdit')->name('location.edit');
+    Route::put('{id}/edit', 'LocationController@putUpdate');
+    Route::post('{id}', 'LocationController@postDelete');
+});
