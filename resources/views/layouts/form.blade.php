@@ -19,7 +19,7 @@
                     </form>
                 </div>
                 <div class="card-footer text-right">
-                    <a class="btn btn-outline-dark" href="@yield('previous_page')">
+                    <a class="btn btn-outline-dark" href="@yield('returnPage')">
                         <span class="oi" data-glyph="x"></span> Cancel
                     </a>
                     <button type="submit" class="btn btn-primary" form="form-@yield('category')">
