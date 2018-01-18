@@ -9,17 +9,24 @@ $list-group-border-color: $laravel-border-color;
 $card-border-color: $laravel-border-color;
 
 // Brands
-$primary: #3097D1;
-$info: #8eb4cb;
-$success: #2ab27b;
-$warning: #cbb956;
-$danger: #bf5329;
+$primary: #007bff;
+$info: #17a2b8;
+$success: #28a745;
+$warning: #ffc107;
+$danger: #c82333;
+
+// Card
+$card-spacer-y: .1rem;
+$card-spacer-x: 1rem;
 
 // Typography
 $font-family-sans-serif: "Raleway", sans-serif;
 $font-size-base: .875rem; // 14px
 $line-height-base: 1.6;
 $text-color: #636b6f;
+
+// Open-iconic
+$iconic-font-path: "/assets/fonts/open-iconic/";
 
 // Inputs
 $input-border-color: lighten($text-color, 40%);

@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="theme-color" content="#f8f9fa"/>
     <title>@yield('title') - IT Asset Management System</title>
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
     <script src="{{ asset('assets/js/app.js') }}"></script>

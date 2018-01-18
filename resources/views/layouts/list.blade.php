@@ -1,22 +1,26 @@
 @extends('layouts.master')
 
 @section('additionalHeaders')
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-table-app.css') }}">
-    <script src="{{ asset('assets/js/bootstrap-table-app.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-table.css') }}">
+    <script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
     <script type="text/javascript">
-        $(document).ready(function(){
-            $("#flashAlert").fadeTo(3000, 500).slideUp(500, function(){
-                $("#flashAlert").slideUp(500);
-            });
-        });
         function addActions(value, row) {
             return [
-                '<div class="btn-group">',
-                @if(Route::currentRouteName() === 'asset.index')
-                    '<button id="detail" class="btn btn-sm btn-primary" href="javascript:void(0)"><span class="glyphicon glyphicon-list"></span> Detail</button>',
-                @endif
-                '<button id="edit" class="btn btn-sm btn-default" href="javascript:void(0)"><span class="glyphicon glyphicon-pencil"></span> Edit</button>',
-                '<button id="delete" class="btn btn-sm btn-danger" href="javascript:void(0)"><span class="glyphicon glyphicon-trash"></span> Delete</button>',
+                '<div>',
+                    @if(Route::currentRouteName() === 'asset.index')
+                    '<button id="detail" class="btn btn-info mr-1" href="javascript:void(0)" aria-label="detail">' +
+                        '<span class="oi" data-glyph="list"></span> ' +
+                        '<span class="d-none d-md-inline"> Detail</span>' +
+                    '</button>',
+                    @endif
+                    `<a id="edit" class="btn btn-light mr-1" href="javascript:void(0)" aria-label="edit">` +
+                        '<span class="oi" data-glyph="pencil"></span>' +
+                        '<span class="d-none d-md-inline"> Edit</span>' +
+                    '</a>',
+                    '<button id="delete" class="btn btn-danger" href="javascript:void(0)" aria-label="delete">' +
+                        '<span class="oi" data-glyph="trash"></span> ' +
+                        '<span class="d-none d-md-inline"> Delete</span>' +
+                    '</button>',
                 '</div>'
             ].join('');
         };
@@ -25,14 +29,11 @@
 @endsection
 
 @section('contents')
-    <div class="row">
-        <div class="col-md-12">
+    <div class="d-flex flex-row">
+        <div class="col-12">
             <div class="table-responsive">
-                @if (session('status'))
-                    <div class="alert alert-success" id="flashAlert">
-                        {{ session('status') }}
-                    </div>
-                @endif
+                <div id="flashAlert">
+                </div>
                 @yield('table')
             </div>
         </div>
