@@ -46,3 +46,23 @@ Route::group(['prefix' => 'admin/location', 'middleware' => 'auth'], function() 
     Route::put('{id}/edit', 'LocationController@putUpdate');
     Route::post('{id}', 'LocationController@postDelete');
 });
+
+Route::group(['prefix' => 'admin/vendor', 'middleware' => 'auth'], function() {
+    Route::view('/', 'admin.vendor.list')->name('vendor.index');
+    Route::view('add', 'admin.vendor.add')->name('vendor.add');
+    Route::get('list', 'VendorController@getList')->name('vendor.list');
+    Route::post('add', 'VendorController@postAdd');
+    Route::get('{id}/edit', 'VendorController@getEdit')->name('vendor.edit');
+    Route::put('{id}/edit', 'VendorController@putUpdate');
+    Route::post('{id}', 'VendorController@postDelete');
+});
+
+Route::group(['prefix' => 'admin/order', 'middleware' => 'auth'], function() {
+    Route::view('/', 'admin.order.list')->name('order.index');
+    Route::view('add', 'admin.order.add')->name('order.add');
+    Route::get('list', 'OrderController@getList')->name('order.list');
+    Route::post('add', 'OrderController@postAdd');
+    Route::get('{id}/edit', 'OrderController@getEdit')->name('order.edit');
+    Route::put('{id}/edit', 'OrderController@putUpdate');
+    Route::post('{id}', 'OrderController@postDelete');
+});
