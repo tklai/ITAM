@@ -1,33 +1,32 @@
 @extends('layouts.master')
 
 @section('contents')
-    @yield('customJS')
     <div class="row">
         <div class="col-md-8 mx-auto">
             @include('layouts.error_msg')
-            @yield('form')
-        </div>
-    </div>
-
-    <div class="modal modal-danger fade" id="dataConfirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel"></h4>
-                </div>
-                <div class="modal-body"></div>
-                <div class="modal-footer">
-                    <form method="post" id="deleteForm" role="form">
+            <h4 class="d-flex align-items-center">
+                <a class="btn btn-outline-dark" href="@yield('returnPage')">
+                    <span class="oi" data-glyph="chevron-left"></span>
+                    <span class="d-none d-sm-inline"> Back</span>
+                </a>
+                <span class="ml-2 text-truncate">@yield('title')</span>
+            </h4>
+            <div class="card">
+                <div class="card-body">
+                    <form class="form form-horizontal" method="POST" id="form-@yield('category')">
                         {{ csrf_field() }}
-                        {{ method_field('DELETE') }}
-
-                        <button type="button" class="btn btn-default  pull-left" data-dismiss="modal">{{ trans('general.cancel') }}</button>
-                        <button type="submit" class="btn btn-outline" id="dataConfirmOK">{{ trans('general.yes') }}</button>
+                        @yield('form')
                     </form>
+                </div>
+                <div class="card-footer text-right">
+                    <a class="btn btn-outline-dark" href="@yield('previous_page')">
+                        <span class="oi" data-glyph="x"></span> Cancel
+                    </a>
+                    <button type="submit" class="btn btn-primary" form="form-@yield('category')">
+                        <span class="oi" data-glyph="plus"></span> Add
+                    </button>
                 </div>
             </div>
         </div>
     </div>
-
 @endsection
