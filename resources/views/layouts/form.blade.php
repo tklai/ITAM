@@ -3,7 +3,7 @@
 @section('contents')
     <div class="row">
         <div class="col-md-8 mx-auto">
-            @include('layouts.error_msg')
+            @include('layouts.message')
             <h4 class="d-flex align-items-center">
                 <a class="btn btn-outline-dark" href="@yield('returnPage')">
                     <span class="oi" data-glyph="chevron-left"></span>

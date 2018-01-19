@@ -14,7 +14,11 @@
 </head>
 <body>
 @include('layouts.navbar')
-<main role="main" class="container pt-3">
+<main role="main" class="container">
+    <div class="d-flex align-items-center justify-content-between pt-3 pb-2">
+        <h3 class="mb-0">@yield('title')</h3>
+        @yield('actionButtons')
+    </div>
     @yield('contents')
 </main>
 </body>

@@ -5,7 +5,7 @@
 @section('contents')
         <div class="d-flex flex-row justify-content-center">
             <div class="col-sm-10 col-md-10">
-                @include('layouts.error_msg')
+                @include('layouts.message')
             </div>
         </div>
         <div class="d-flex flex-row flex-wrap justify-content-center">
@@ -25,7 +25,9 @@
                         <label>Password</label>
                         <input id="password" type="password" class="form-control" name="password" required="true">
                     </div>
-                    <button type="submit" class="btn btn-primary">Login</button>
+                    <button type="submit" class="btn btn-primary">
+                        <span class="oi" data-glyph="account-login"></span> Login
+                    </button>
                 </form>
             </div>
         </div>
