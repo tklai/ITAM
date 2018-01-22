@@ -20,7 +20,7 @@ class CreateOrdersTable extends Migration
             $table->date('warrantyExpiryDate');
             $table->integer('vendor_id')->unsigned();
             $table->string('type');
-            $table->string('remarks');
+            $table->string('remarks')->nullable();
         });
     }
 
