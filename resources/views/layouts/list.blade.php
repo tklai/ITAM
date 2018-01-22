@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('actionButtons')
-        <a class="btn btn-primary" href="/admin/@yield('category')/add" aria-label="create">
+        <a class="btn btn-primary order-12 ml-auto" href="/admin/@yield('category')/add" aria-label="create">
             <span class="oi" data-glyph="plus"></span> Add</a>
     {{--<a class="btn btn-danger" href="" aria-label="delete">--}}
     {{--<span class="oi" data-glyph="trash"></span> Delete--}}
