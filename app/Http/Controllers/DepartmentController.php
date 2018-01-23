@@ -29,7 +29,7 @@ class DepartmentController extends Controller
             ->with('department', $department);
     }
 
-    public function putUdate(DepartmentRequest $request, $id = null) {
+    public function putUpdate(DepartmentRequest $request, $id = null) {
         if ($id == null) {
             return redirect()->route('department.index');
         }
