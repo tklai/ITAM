@@ -12,7 +12,6 @@
     @include('layouts.message')
     <div class="table-responsive">
         @yield('table')
-
     </div>
     @include('layouts.bootstrap-table')
 @endsection
