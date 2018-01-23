@@ -4,12 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Order;
+use App\Vendor;
 use App\Http\Requests\OrderRequest;
 
 class OrderController extends Controller
 {
     public function getList() {
-        return Order::All();
+        return Order::with('vendor')->get();
+    }
+
+    public function getAdd() {
+        $vendors = Vendor::all();
+        return view('admin.order.add')
+            ->with('vendors', $vendors);
     }
 
     public function postAdd(OrderRequest $request) {
@@ -30,8 +37,10 @@ class OrderController extends Controller
         }
 
         $order = Order::find($id);
+        $vendors = Vendor::all();
         return view('admin.order.edit')
-            ->with('order', $order);
+            ->with('order', $order)
+            ->with('vendors', $vendors);
     }
 
     public function putUpdate(OrderRequest $request, $id = null) {
