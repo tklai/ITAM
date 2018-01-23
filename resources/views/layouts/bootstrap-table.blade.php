@@ -13,10 +13,11 @@
                     '<span class="oi" data-glyph="pencil"></span>' +
                     '<span class="d-none d-md-inline"> Edit</span>' +
                 '</button>',
+                {{-- Delete button (DISABLED)
                 '<button id="delete" class="btn btn-danger" aria-label="delete">' +
                     '<span class="oi" data-glyph="trash"></span> ' +
                     '<span class="d-none d-md-inline"> Delete</span>' +
-                '</button>'
+                '</button>' --}}
         ].join('');
     }
 
@@ -30,9 +31,9 @@
         'click #edit': function (e, value, row) {
             window.location.assign(`/admin/@yield('category')/${row['id']}/edit`);
         },
-
+        {{-- Delete button event (DISABLED)
         'click #delete': function (e, value, row) {
-            event.preventDefault();
+            e.preventDefault();
             $.ajax({
                 url: `/admin/@yield('category')/${row['id']}`,
                 type: 'POST',
@@ -50,5 +51,6 @@
                 }
             });
         }
+        --}}
     };
 </script>
