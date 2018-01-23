@@ -68,12 +68,12 @@ Route::group(['prefix' => 'admin/vendor', 'middleware' => 'auth'], function() {
     Route::post('{id}', 'VendorController@postDelete');
 });
 
-Route::group(['prefix' => 'admin/order', 'middleware' => 'auth'], function() {
-    Route::view('/', 'admin.order.list')->name('order.index');
-    Route::get('add', 'OrderController@getAdd')->name('order.add');
-    Route::post('add', 'OrderController@postAdd');
-    Route::get('list', 'OrderController@getList')->name('order.list');
-    Route::get('{id}/edit', 'OrderController@getEdit')->name('order.edit');
-    Route::put('{id}/edit', 'OrderController@putUpdate');
-    Route::post('{id}', 'OrderController@postDelete');
-});
+//Route::group(['prefix' => 'admin/order', 'middleware' => 'auth'], function() {
+//    Route::view('/', 'admin.order.list')->name('order.index');
+//    Route::get('add', 'OrderController@getAdd')->name('order.add');
+//    Route::post('add', 'OrderController@postAdd');
+//    Route::get('list', 'OrderController@getList')->name('order.list');
+//    Route::get('{id}/edit', 'OrderController@getEdit')->name('order.edit');
+//    Route::put('{id}/edit', 'OrderController@putUpdate');
+//    Route::post('{id}', 'OrderController@postDelete');
+//});
