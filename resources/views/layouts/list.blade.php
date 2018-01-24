@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('additionalHeaders')
+    @include('layouts.bootstrap-table')
+@endsection
+
 @section('contents')
     @include('layouts.message')
     <div id="toolbar">
@@ -13,5 +17,5 @@
     <div class="table-responsive">
         @yield('table')
     </div>
-    @include('layouts.bootstrap-table')
+
 @endsection

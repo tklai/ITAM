@@ -27,6 +27,24 @@
     }
     @endif
 
+    @if(Route::currentRouteName() === 'asset.index')
+    function warrantyCell(value) {
+        var warrantyDate = new Date(value);
+        var today = new Date();
+        var diff = Math.round((warrantyDate - today)/86400000);
+        switch (true) {
+            case (diff < 365 && diff >= 180):
+                return {css: {"background-color": "#daffb3"}};
+            case (diff < 180 && diff >= 90):
+                return {css: {"background-color": "#ffffbb"}};
+            case (diff < 90):
+                return {css: {"background-color": "#ffad99", "color": "white"}};
+            default:
+                return {};
+        }
+    }
+    @endif
+
     window.actionEvents = {
         'click #edit': function (e, value, row) {
             window.location.assign(`/admin/@yield('category')/${row['id']}/edit`);

@@ -27,6 +27,16 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('admin', 'AdminController@index')->name('admin.index');
 
+Route::group(['prefix' => 'admin/asset', 'middleware' => 'auth'], function() {
+    Route::view('/', 'admin.asset.list')->name('asset.index');
+    Route::get('add', 'AssetController@getAdd')->name('asset.add');
+    Route::get('list', 'AssetController@getList')->name('asset.list');
+    Route::post('add', 'AssetController@postAdd');
+    Route::get('{id}/edit', 'AssetController@getEdit')->name('asset.edit');
+    Route::put('{id}/edit', 'AssetController@putUpdate');
+    Route::post('{id}', 'AssetController@postDelete');
+});
+
 Route::group(['prefix' => 'admin/department', 'middleware' => 'auth'], function() {
     Route::view('/', 'admin.department.list')->name('department.index');
     Route::view('add', 'admin.department.add')->name('department.add');
@@ -56,7 +66,6 @@ Route::group(['prefix' => 'admin/model', 'middleware' => 'auth'], function() {
     Route::put('{id}/edit', 'AssetModelController@putUpdate');
     Route::post('{id}', 'AssetModelController@postDelete');
 });
-
 
 Route::group(['prefix' => 'admin/vendor', 'middleware' => 'auth'], function() {
     Route::view('/', 'admin.vendor.list')->name('vendor.index');
