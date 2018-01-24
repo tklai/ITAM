@@ -5,17 +5,17 @@
         return [
                 @if(Route::currentRouteName() === 'asset.index')
                 '<button id="detail" class="btn btn-info mr-1" aria-label="detail">' +
-                    '<span class="oi" data-glyph="list"></span> ' +
+                    '<span class="fa fa-list"></span> ' +
                     '<span class="d-none d-md-inline"> Detail</span>' +
                 '</button>',
                 @endif
                 `<button id="edit" class="btn btn-light mr-1" aria-label="edit">` +
-                    '<span class="oi" data-glyph="pencil"></span>' +
+                    '<span class="fa fa-pencil" data-glyph="pencil"></span>' +
                     '<span class="d-none d-md-inline"> Edit</span>' +
                 '</button>',
                 {{-- Delete button (DISABLED)
                 '<button id="delete" class="btn btn-danger" aria-label="delete">' +
-                    '<span class="oi" data-glyph="trash"></span> ' +
+                    '<span class="fa fa-trash"></span> ' +
                     '<span class="d-none d-md-inline"> Delete</span>' +
                 '</button>' --}}
         ].join('');

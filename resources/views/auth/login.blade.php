@@ -26,7 +26,7 @@
                         <input id="password" type="password" class="form-control" name="password" required="true">
                     </div>
                     <button type="submit" class="btn btn-primary">
-                        <span class="oi" data-glyph="account-login"></span> Login
+                        <span class="fa fa-sign-in"></span> Login
                     </button>
                 </form>
             </div>
