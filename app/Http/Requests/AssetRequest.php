@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class OrderRequest extends FormRequest
+class AssetRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,13 @@ class OrderRequest extends FormRequest
     public function rules()
     {
         return [
-            "orderNumber" => "required",
-            "deliveryDate" => "required",
-            "warrantyExpiryDate" => "required",
+            "machineName" => "required|max:255|unique:assets,machineName,{$this->id}",
+            "asset_model_id" => "required",
+            "serialNumber" => "required|max:255|unique:assets,serialNumber,{$this->id}",
             "vendor_id" => "required",
-            "type" => "required",
+            "orderDate" => "required|before:today",
+            "warrantyExpiryDate" => "required",
+            "location_id" => "required",
             "remarks" => "max:255",
         ];
     }

@@ -5,18 +5,19 @@
         return [
                 @if(Route::currentRouteName() === 'asset.index')
                 '<button id="detail" class="btn btn-info mr-1" aria-label="detail">' +
-                    '<span class="oi" data-glyph="list"></span> ' +
+                    '<span class="fa fa-list"></span> ' +
                     '<span class="d-none d-md-inline"> Detail</span>' +
                 '</button>',
                 @endif
                 `<button id="edit" class="btn btn-light mr-1" aria-label="edit">` +
-                    '<span class="oi" data-glyph="pencil"></span>' +
+                    '<span class="fa fa-pencil" data-glyph="pencil"></span>' +
                     '<span class="d-none d-md-inline"> Edit</span>' +
                 '</button>',
+                {{-- Delete button (DISABLED)
                 '<button id="delete" class="btn btn-danger" aria-label="delete">' +
-                    '<span class="oi" data-glyph="trash"></span> ' +
+                    '<span class="fa fa-trash"></span> ' +
                     '<span class="d-none d-md-inline"> Delete</span>' +
-                '</button>'
+                '</button>' --}}
         ].join('');
     }
 
@@ -26,13 +27,31 @@
     }
     @endif
 
+    @if(Route::currentRouteName() === 'asset.index')
+    function warrantyCell(value) {
+        var warrantyDate = new Date(value);
+        var today = new Date();
+        var diff = Math.round((warrantyDate - today)/86400000);
+        switch (true) {
+            case (diff < 365 && diff >= 180):
+                return {css: {"background-color": "#daffb3"}};
+            case (diff < 180 && diff >= 90):
+                return {css: {"background-color": "#ffffbb"}};
+            case (diff < 90):
+                return {css: {"background-color": "#ffad99", "color": "white"}};
+            default:
+                return {};
+        }
+    }
+    @endif
+
     window.actionEvents = {
         'click #edit': function (e, value, row) {
             window.location.assign(`/admin/@yield('category')/${row['id']}/edit`);
         },
-
+        {{-- Delete button event (DISABLED)
         'click #delete': function (e, value, row) {
-            event.preventDefault();
+            e.preventDefault();
             $.ajax({
                 url: `/admin/@yield('category')/${row['id']}`,
                 type: 'POST',
@@ -50,5 +69,6 @@
                 }
             });
         }
+        --}}
     };
 </script>

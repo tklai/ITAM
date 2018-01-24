@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrdersTable extends Migration
+class CreateAssetsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,17 @@ class CreateOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('assets', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('orderNumber')->unique();
-            $table->date('deliveryDate');
-            $table->date('warrantyExpiryDate');
+            $table->string('machineName');
+            $table->integer('asset_model_id')->unsigned();
+            $table->string('serialNumber')->unique();
             $table->integer('vendor_id')->unsigned();
-            $table->string('type');
-            $table->string('funding')->nullable();
+            $table->date('orderDate');
+            $table->date('warrantyExpiryDate');
+            $table->integer('location_id')->unsigned();
             $table->string('remarks')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -32,6 +34,6 @@ class CreateOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('assets');
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LocationRequest extends FormRequest
+class AssetModelRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,9 @@ class LocationRequest extends FormRequest
     public function rules()
     {
         return [
-            "room_number" => "required|min:3|max:4|unique:locations,room_number,".$this->id,
-            "description" => "required|max:30",
+            "name" => "required|max:255|unique:categories,name,{$this->id}",
+            "category_id" => "required",
+            "details" => "max:255",
         ];
     }
 }

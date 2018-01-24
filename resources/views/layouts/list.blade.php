@@ -1,18 +1,21 @@
 @extends('layouts.master')
 
-@section('actionButtons')
-        <a class="btn btn-primary order-12 ml-auto" href="/admin/@yield('category')/add" aria-label="create">
-            <span class="oi" data-glyph="plus"></span> Add</a>
-    {{--<a class="btn btn-danger" href="" aria-label="delete">--}}
-    {{--<span class="oi" data-glyph="trash"></span> Delete--}}
-    {{--</a>--}}
+@section('additionalHeaders')
+    @include('layouts.bootstrap-table')
 @endsection
 
 @section('contents')
     @include('layouts.message')
+    <div id="toolbar">
+        <a class="btn btn-primary" href="/admin/@yield('category')/add" aria-label="create">
+            <span class="fa fa-plus"></span> Add
+        </a>
+        {{--<a class="btn btn-danger" href="" aria-label="delete">--}}
+            {{--<span class="fa fa-trash"></span> Delete--}}
+        {{--</a>--}}
+    </div>
     <div class="table-responsive">
         @yield('table')
-
     </div>
-    @include('layouts.bootstrap-table')
+
 @endsection

@@ -14,4 +14,7 @@ class Order extends Model
         'vendor_id', 'type', 'remarks'
     ];
 
+    public function vendor() {
+        return $this->belongsTo(Vendor::class);
+    }
 }

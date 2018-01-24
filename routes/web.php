@@ -27,6 +27,16 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('admin', 'AdminController@index')->name('admin.index');
 
+Route::group(['prefix' => 'admin/asset', 'middleware' => 'auth'], function() {
+    Route::view('/', 'admin.asset.list')->name('asset.index');
+    Route::get('add', 'AssetController@getAdd')->name('asset.add');
+    Route::get('list', 'AssetController@getList')->name('asset.list');
+    Route::post('add', 'AssetController@postAdd');
+    Route::get('{id}/edit', 'AssetController@getEdit')->name('asset.edit');
+    Route::put('{id}/edit', 'AssetController@putUpdate');
+    Route::post('{id}', 'AssetController@postDelete');
+});
+
 Route::group(['prefix' => 'admin/department', 'middleware' => 'auth'], function() {
     Route::view('/', 'admin.department.list')->name('department.index');
     Route::view('add', 'admin.department.add')->name('department.add');
@@ -47,6 +57,16 @@ Route::group(['prefix' => 'admin/location', 'middleware' => 'auth'], function() 
     Route::post('{id}', 'LocationController@postDelete');
 });
 
+Route::group(['prefix' => 'admin/model', 'middleware' => 'auth'], function() {
+    Route::view('/', 'admin.model.list')->name('model.index');
+    Route::get('add', 'AssetModelController@getAdd')->name('model.add');
+    Route::post('add', 'AssetModelController@postAdd');
+    Route::get('list', 'AssetModelController@getList')->name('model.list');
+    Route::get('{id}/edit', 'AssetModelController@getEdit')->name('model.edit');
+    Route::put('{id}/edit', 'AssetModelController@putUpdate');
+    Route::post('{id}', 'AssetModelController@postDelete');
+});
+
 Route::group(['prefix' => 'admin/vendor', 'middleware' => 'auth'], function() {
     Route::view('/', 'admin.vendor.list')->name('vendor.index');
     Route::view('add', 'admin.vendor.add')->name('vendor.add');
@@ -57,12 +77,12 @@ Route::group(['prefix' => 'admin/vendor', 'middleware' => 'auth'], function() {
     Route::post('{id}', 'VendorController@postDelete');
 });
 
-Route::group(['prefix' => 'admin/order', 'middleware' => 'auth'], function() {
-    Route::view('/', 'admin.order.list')->name('order.index');
-    Route::view('add', 'admin.order.add')->name('order.add');
-    Route::get('list', 'OrderController@getList')->name('order.list');
-    Route::post('add', 'OrderController@postAdd');
-    Route::get('{id}/edit', 'OrderController@getEdit')->name('order.edit');
-    Route::put('{id}/edit', 'OrderController@putUpdate');
-    Route::post('{id}', 'OrderController@postDelete');
-});
+//Route::group(['prefix' => 'admin/order', 'middleware' => 'auth'], function() {
+//    Route::view('/', 'admin.order.list')->name('order.index');
+//    Route::get('add', 'OrderController@getAdd')->name('order.add');
+//    Route::post('add', 'OrderController@postAdd');
+//    Route::get('list', 'OrderController@getList')->name('order.list');
+//    Route::get('{id}/edit', 'OrderController@getEdit')->name('order.edit');
+//    Route::put('{id}/edit', 'OrderController@putUpdate');
+//    Route::post('{id}', 'OrderController@postDelete');
+//});

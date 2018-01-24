@@ -1,6 +1,6 @@
 @if (count($errors))
     <div class="alert alert-danger" role="alert">
-        <span class="oi" data-glyph="x"></span> The following problems occurred:<p>
+        <span class="fa fa-times-circle"></span> The following problems occurred:<p>
         <ul>
         @foreach($errors->all() as $error)
             <li>{{ $error }}</li>
@@ -11,6 +11,6 @@
 
 @guest
 <div class="alert alert-info" role="alert">
-    <span class="oi" data-glyph="bullhorn"></span> Please login before you access the system.
+    <span class="fa fa-info"></span> Please login before you access the system.
 </div>
 @endguest

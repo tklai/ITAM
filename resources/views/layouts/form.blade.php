@@ -2,7 +2,7 @@
 
 @section('actionButtons')
     <a class="btn btn-outline-dark mr-3" href="@yield('returnPage')">
-        <span class="oi" data-glyph="chevron-left"></span>
+        <span class="fa fa-chevron-left"></span>
         <span class="d-none d-sm-inline"> Back</span>
     </a>
 @endsection
@@ -18,10 +18,10 @@
         </div>
         <div class="card-footer text-right">
             <a class="btn btn-outline-dark" href="@yield('returnPage')">
-                <span class="oi" data-glyph="x"></span> Cancel
+                <span class="fa fa-times"></span> Cancel
             </a>
             <button type="submit" class="btn btn-primary" form="form-@yield('category')">
-                <span class="oi" data-glyph="plus"></span> Add
+                <span class="fa fa-plus"></span> Add
             </button>
         </div>
     </div>
