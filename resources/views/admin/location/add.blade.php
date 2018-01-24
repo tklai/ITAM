@@ -6,7 +6,7 @@
 
 @section('form')
     <div class="form-group">
-        <label class="control-label" for="input-id">Room Number</label>
+        <label class="control-label" for="input-room_number">Room Number</label>
         <input type="text" class="form-control" id="input-room_number" name="room_number"
                value="{{ old('room_number') }}">
     </div>
