@@ -24,12 +24,12 @@ class OrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'orderNumber' => 'required',
-            'deliveryDate' => 'required',
-            'warrantyExpiryDate' => 'required',
-            'vendor_id' => 'required',
-            'type' => 'required',
-            'remarks' => 'max:255',
+            "orderNumber" => "required",
+            "deliveryDate" => "required",
+            "warrantyExpiryDate" => "required",
+            "vendor_id" => "required",
+            "type" => "required",
+            "remarks" => "max:255",
         ];
     }
 }

@@ -24,8 +24,8 @@ class LocationRequest extends FormRequest
     public function rules()
     {
         return [
-            'room_number' => 'required|min:3|max:4|unique:locations,room_number,'.$this->id,
-            'description' => 'required|max:30',
+            "room_number" => "required|min:3|max:4|unique:locations,room_number,".$this->id,
+            "description" => "required|max:30",
         ];
     }
 }
