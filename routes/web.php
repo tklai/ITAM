@@ -30,6 +30,8 @@ Route::get('admin', 'AdminController@index')->name('admin.index');
 Route::group(['prefix' => 'admin/asset', 'middleware' => 'auth'], function() {
     Route::view('/', 'admin.asset.list')->name('asset.index');
     Route::get('add', 'AssetController@getAdd')->name('asset.add');
+    Route::get('{id}/detail', 'AssetController@getDetail')->name('asset.detail');
+    Route::get('{id}/list', 'AssetController@getDetailList')->name('asset.detailList');
     Route::get('list', 'AssetController@getList')->name('asset.list');
     Route::post('add', 'AssetController@postAdd');
     Route::get('{id}/edit', 'AssetController@getEdit')->name('asset.edit');
@@ -50,6 +52,8 @@ Route::group(['prefix' => 'admin/department', 'middleware' => 'auth'], function(
 Route::group(['prefix' => 'admin/location', 'middleware' => 'auth'], function() {
     Route::view('/', 'admin.location.list')->name('location.index');
     Route::view('add', 'admin.location.add')->name('location.add');
+    Route::get('{id}/detail', 'LocationController@getDetail')->name('location.detail');
+    Route::get('{id}/list', 'LocationController@getDetailList')->name('location.detailList');
     Route::get('list', 'LocationController@getList')->name('location.list');
     Route::post('add', 'LocationController@postAdd');
     Route::get('{id}/edit', 'LocationController@getEdit')->name('location.edit');
@@ -60,6 +64,8 @@ Route::group(['prefix' => 'admin/location', 'middleware' => 'auth'], function() 
 Route::group(['prefix' => 'admin/model', 'middleware' => 'auth'], function() {
     Route::view('/', 'admin.model.list')->name('model.index');
     Route::get('add', 'AssetModelController@getAdd')->name('model.add');
+    Route::get('{id}/detail', 'AssetModelController@getDetail')->name('model.detail');
+    Route::get('{id}/list', 'AssetModelController@getDetailList')->name('model.detailList');
     Route::post('add', 'AssetModelController@postAdd');
     Route::get('list', 'AssetModelController@getList')->name('model.list');
     Route::get('{id}/edit', 'AssetModelController@getEdit')->name('model.edit');
@@ -70,6 +76,8 @@ Route::group(['prefix' => 'admin/model', 'middleware' => 'auth'], function() {
 Route::group(['prefix' => 'admin/vendor', 'middleware' => 'auth'], function() {
     Route::view('/', 'admin.vendor.list')->name('vendor.index');
     Route::view('add', 'admin.vendor.add')->name('vendor.add');
+    Route::get('{id}/detail', 'VendorController@getDetail')->name('vendor.detail');
+    Route::get('{id}/list', 'VendorController@getDetailList')->name('vendor.detailList');
     Route::get('list', 'VendorController@getList')->name('vendor.list');
     Route::post('add', 'VendorController@postAdd');
     Route::get('{id}/edit', 'VendorController@getEdit')->name('vendor.edit');
