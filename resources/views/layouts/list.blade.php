@@ -1,6 +1,8 @@
 @extends('layouts.master')
 
 @section('additionalHeaders')
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-table.css') }}">
+    <script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
     @include('layouts.bootstrap-table')
 @endsection
 
@@ -17,5 +19,4 @@
     <div class="table-responsive">
         @yield('table')
     </div>
-
 @endsection

@@ -10,4 +10,12 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    protected function checkNull($id = null, $category = 'admin') {
+        if ($id == null) {
+            return redirect()->route("{$category}.index");
+        }
+        return null;
+    }
+
 }

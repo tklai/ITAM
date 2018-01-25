@@ -20,31 +20,22 @@ class DepartmentController extends Controller
     }
 
     public function getEdit($id = null) {
-        if ($id == null) {
-            return redirect()->route('department.index');
-        }
-
+        $this->checkNull($id, 'department');
         $department = Department::find($id);
         return view('admin.department.edit')
             ->with('department', $department);
     }
 
     public function putUpdate(DepartmentRequest $request, $id = null) {
-        if ($id == null) {
-            return redirect()->route('department.index');
-        }
-
+        $this->checkNull($id, 'department');
         Department::find($id)->update([
             'name' => $request->input('name')
         ]);
         return redirect()->route('department.index');
     }
 
-    public function postDelete($id) {
-        if ($id == null) {
-            return redirect()->route('department.index');
-        }
-
+    public function postDelete($id = null) {
+        $this->checkNull($id, 'department');
         Department::destroy($id);
         return;
     }

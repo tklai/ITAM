@@ -4,7 +4,7 @@
 @section('category', 'location')
 
 @section('table')
-    <table class="table" id="departmentList"
+    <table class="table" id="locationList"
            data-toggle="table"
            data-url="{{ route('location.list') }}"
            data-id-field="id"
