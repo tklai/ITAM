@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "Izum1Kun/ITAM",
+    "description": "An IT Asset Management System",
+    "keywords": ["ITAM", "Asset Management"],
     "license": "MIT",
     "type": "project",
     "require": {
