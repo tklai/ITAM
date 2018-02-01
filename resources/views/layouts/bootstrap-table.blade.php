@@ -54,15 +54,15 @@
     }
 
     function modelDetail(value, row) {
-        return `<a href="/admin/model/${row['asset_model_id']}/detail">${value}</a>`;
+        return `<a href="/models/${row['asset_model_id']}">${value}</a>`;
     }
 
     function locationDetail(value, row) {
-        return `<a href="/admin/location/${row['location_id']}/detail">${value}</a>`;
+        return `<a href="/locations/${row['location_id']}">${value}</a>`;
     }
 
     function vendorDetail(value, row) {
-        return `<a href="/admin/vendor/${row['vendor_id']}/detail">${value}</a>`;
+        return `<a href="/vendors/${row['vendor_id']}">${value}</a>`;
     }
 
     // Format the cell and highlight the asset that
