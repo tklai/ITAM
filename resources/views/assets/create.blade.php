@@ -1,8 +1,8 @@
 @extends('layouts.form')
 
 @section('title', 'Add asset')
-@section('category', 'asset')
-@section('returnPage', route('asset.index'))
+@section('category', 'assets')
+@section('actionPage', route('assets.store'))
 
 @section('form')
     <div class="form-group">

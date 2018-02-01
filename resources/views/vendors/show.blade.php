@@ -1,13 +1,12 @@
-@extends('layouts.detail')
+@extends('layouts.show')
 
-@section('title', "View Model: {$model->name}")
-@section('category', 'model')
-@section('returnPage', 'javascript:window.history.back();')
+@section('title', "View Vendor: {$vendor->name}")
+@section('category', 'vendors')
 
 @section('tab-items')
     <li class="nav-item">
         <a class="nav-link active" id="detail-tab" data-toggle="tab" href="#detail" role="tab" aria-controls="detail"
-           aria-selected="true">Model Details</a>
+           aria-selected="true">Vendor Details</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" id="assets-tab" data-toggle="tab" href="#assets" role="tab" aria-controls="assets"
@@ -16,29 +15,29 @@
 @endsection
 
 @section('tab-contents')
-    <div class="tab-pane fade show active" id="detail" role="tabpanel" aria-labelledby="home-tab">
+    <div class="tab-pane fade show active" id="detail" role="tabpanel" aria-labelledby="detail-tab">
         <div class="table-responsive">
             <table class="table">
                 <tr>
                     <td>Name</td>
-                    <td>{{ $model->name }}</td>
+                    <td>{{ $vendor->name }}</td>
                 </tr>
                 <tr>
                     <td>Category</td>
-                    <td>{{ $model->category->name }}</td>
+                    <td>{{ $vendor->address }}</td>
                 </tr>
                 <tr>
                     <td>Details</td>
-                    <td>{{ $model->details }}</td>
+                    <td>{{ $vendor->phone }}</td>
                 </tr>
             </table>
         </div>
     </div>
-    <div class="tab-pane fade" id="assets" role="tabpanel" aria-labelledby="profile-tab">
+    <div class="tab-pane fade" id="assets" role="tabpanel" aria-labelledby="assets-tab">
         <div class="table-responsive">
             <table class="table" id="assetList"
                    data-toggle="table"
-                   data-url="{{ route('model.detailList', ['id' => $model->id ]) }}"
+                   data-url="{{ route('vendors.assets', ['id' => $vendor->id ]) }}"
                    data-id-field="id"
                    data-sort-name="id"
                    data-search="true"
@@ -51,9 +50,9 @@
                 <thead>
                 <tr>
                     <th data-field="machineName" data-sortable="true">Name</th>
-                    <th data-field="asset_model.name" data-sortable="true" data-visible="false">Model</th>
+                    <th data-field="asset_model.name" data-sortable="true">Model</th>
                     <th data-field="serialNumber" data-sortable="true">Serial No.</th>
-                    <th data-field="vendor.name" data-sortable="true">Vendor</th>
+                    <th data-field="vendor.name" data-sortable="true" data-visible="false">Vendor</th>
                     <th data-field="orderDate" data-sortable="true" data-visible="false">Order Date</th>
                     <th data-field="warrantyExpiryDate" data-sortable="true" data-visible="false"
                         data-cell-style="warrantyCell">Warranty

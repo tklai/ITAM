@@ -1,11 +1,12 @@
 @extends('layouts.form')
 
 @section('title', "Edit asset: {$asset->machineName}")
-@section('category', 'asset')
-@section('returnPage', route('asset.index'))
+@section('category', 'assets')
+@section('actionPage', route('assets.update', ['id' => $asset->id]))
 
 @section('form')
     {{ method_field('PUT') }}
+    <input type="hidden" id="input-id" name="id" value="{{ old('id', $asset->id) }}">
     <div class="form-group">
         <label class="control-label" for="input-machineName">Name</label>
         <input type="text" class="form-control" id="input-machineName" name="machineName"

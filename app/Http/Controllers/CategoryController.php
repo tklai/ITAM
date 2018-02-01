@@ -5,9 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 
-class CategoryController extends Controller {
+class CategoryController extends Controller
+{
 
-    public function postAdd(Request $request) {
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return null
+     */
+    public function store(Request $request)
+    {
         $this->validate($request, [
             'name' => 'required|unique|max:255',
         ]);
@@ -17,5 +25,4 @@ class CategoryController extends Controller {
         ]);
         return;
     }
-
 }

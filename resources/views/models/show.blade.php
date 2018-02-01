@@ -1,13 +1,12 @@
-@extends('layouts.detail')
+@extends('layouts.show')
 
-@section('title', "View Vendor: {$vendor->name}")
-@section('category', 'model')
-@section('returnPage', 'javascript:window.history.back();')
+@section('title', "View Model: {$model->name}")
+@section('category', 'models')
 
 @section('tab-items')
     <li class="nav-item">
         <a class="nav-link active" id="detail-tab" data-toggle="tab" href="#detail" role="tab" aria-controls="detail"
-           aria-selected="true">Vendor Details</a>
+           aria-selected="true">Model Details</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" id="assets-tab" data-toggle="tab" href="#assets" role="tab" aria-controls="assets"
@@ -21,15 +20,15 @@
             <table class="table">
                 <tr>
                     <td>Name</td>
-                    <td>{{ $vendor->name }}</td>
+                    <td>{{ $model->name }}</td>
                 </tr>
                 <tr>
                     <td>Category</td>
-                    <td>{{ $vendor->address }}</td>
+                    <td>{{ $model->category->name }}</td>
                 </tr>
                 <tr>
                     <td>Details</td>
-                    <td>{{ $vendor->phone }}</td>
+                    <td>{{ $model->details }}</td>
                 </tr>
             </table>
         </div>
@@ -38,7 +37,7 @@
         <div class="table-responsive">
             <table class="table" id="assetList"
                    data-toggle="table"
-                   data-url="{{ route('vendor.detailList', ['id' => $vendor->id ]) }}"
+                   data-url="{{ route('models.assets', ['id' => $model->id ]) }}"
                    data-id-field="id"
                    data-sort-name="id"
                    data-search="true"
@@ -51,9 +50,9 @@
                 <thead>
                 <tr>
                     <th data-field="machineName" data-sortable="true">Name</th>
-                    <th data-field="asset_model.name" data-sortable="true">Model</th>
+                    <th data-field="asset_model.name" data-sortable="true" data-visible="false">Model</th>
                     <th data-field="serialNumber" data-sortable="true">Serial No.</th>
-                    <th data-field="vendor.name" data-sortable="true" data-visible="false">Vendor</th>
+                    <th data-field="vendor.name" data-sortable="true">Vendor</th>
                     <th data-field="orderDate" data-sortable="true" data-visible="false">Order Date</th>
                     <th data-field="warrantyExpiryDate" data-sortable="true" data-visible="false"
                         data-cell-style="warrantyCell">Warranty

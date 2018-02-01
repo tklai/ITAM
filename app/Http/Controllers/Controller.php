@@ -11,8 +11,16 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    protected function checkNull($id = null, $category = 'admin') {
-        if ($id == null) {
+    /**
+     * Check the value is null or not.
+     * If null, return to the index of the category.
+     *
+     * @param null $value The value that should be checked
+     * @param string $category The category that should be redirected
+     * @return \Illuminate\Http\RedirectResponse|null
+     */
+    protected function checkNull($value = null, $category = 'admin') {
+        if ($value == null) {
             return redirect()->route("{$category}.index");
         }
         return null;

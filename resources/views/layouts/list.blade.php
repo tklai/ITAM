@@ -1,7 +1,10 @@
 @extends('layouts.master')
 
-@section('additionalHeaders')
+@section('style')
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-table.css') }}">
+@endsection
+
+@section('javascript')
     <script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
     @include('layouts.bootstrap-table')
 @endsection
@@ -9,7 +12,7 @@
 @section('contents')
     @include('layouts.message')
     <div id="toolbar">
-        <a class="btn btn-primary" href="/admin/@yield('category')/add" aria-label="create">
+        <a class="btn btn-primary" href="@yield('createPage')" aria-label="create">
             <span class="fa fa-plus"></span> Add
         </a>
         {{--<a class="btn btn-danger" href="" aria-label="delete">--}}

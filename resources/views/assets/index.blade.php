@@ -1,12 +1,13 @@
 @extends('layouts.list')
 
 @section('title', 'Assets')
-@section('category', 'asset')
+@section('category', 'assets')
+@section('createPage', route('assets.create'))
 
 @section('table')
     <table class="table" id="assetList"
            data-toggle="table"
-           data-url="{{ route('asset.list') }}"
+           data-url="{{ route('assets.list') }}"
            data-id-field="id"
            data-sort-name="id"
            data-search="true"

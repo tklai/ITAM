@@ -1,8 +1,8 @@
 @extends('layouts.form')
 
 @section('title', 'Edit Vendor: '.$vendor->name)
-@section('category', 'vendor')
-@section('returnPage', route('vendor.index'))
+@section('category', 'vendors')
+@section('actionPage', route('vendors.update', ['id' => $vendor->id]))
 
 @section('form')
     {{ method_field('PUT') }}

@@ -1,8 +1,8 @@
 @extends('layouts.form')
 
 @section('title', 'Add Vendor')
-@section('category', 'vendor')
-@section('returnPage', route('vendor.index'))
+@section('category', 'vendors')
+@section('actionPage', route('vendors.store'))
 
 @section('form')
     <div class="form-group">

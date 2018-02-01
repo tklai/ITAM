@@ -1,8 +1,7 @@
-@extends('layouts.detail')
+@extends('layouts.show')
 
 @section('title', "View Location: {$location->room_number}")
-@section('category', 'location')
-@section('returnPage', 'javascript:window.history.back();')
+@section('category', 'locations')
 
 @section('tab-items')
     <li class="nav-item">
@@ -16,7 +15,7 @@
 @endsection
 
 @section('tab-contents')
-    <div class="tab-pane fade show active" id="detail" role="tabpanel" aria-labelledby="home-tab">
+    <div class="tab-pane fade show active" id="detail" role="tabpanel" aria-labelledby="detail-tab">
         <div class="table-responsive">
             <table class="table">
                 <tr>
@@ -30,10 +29,10 @@
             </table>
         </div>
     </div>
-    <div class="tab-pane fade" id="assets" role="tabpanel" aria-labelledby="profile-tab">
+    <div class="tab-pane fade" id="assets" role="tabpanel" aria-labelledby="assets-tab">
         <div class="table-responsive">
-            <table class="table" id="assetList" data-toggle="table"
-                   data-url="{{ route('location.detailList', ['id' => $location->id ]) }}"
+            <table class="table" id="assetsList" data-toggle="table"
+                   data-url="{{ route('locations.assets', ['id' => $location->id ]) }}"
                    data-id-field="id"
                    data-sort-name="id"
                    data-search="true"

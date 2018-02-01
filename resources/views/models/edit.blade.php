@@ -1,11 +1,12 @@
 @extends('layouts.form')
 
 @section('title', "Edit model: {$model->name}")
-@section('category', 'model')
-@section('returnPage', route('model.index'))
+@section('category', 'models')
+@section('actionPage', route('models.update', ['id' => $model->id]))
 
 @section('form')
     {{ method_field('PUT') }}
+    <input type="hidden" id="input-id" name="id" value="{{ old('id', $model->id) }}">
     <div class="form-group">
         <label class="control-label" for="input-name">Model Name</label>
         <input type="text" class="form-control" id="input-name" name="name" value="{{ old('name', $model->name) }}">

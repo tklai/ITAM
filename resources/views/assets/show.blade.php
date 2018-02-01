@@ -1,8 +1,7 @@
-@extends('layouts.detail')
+@extends('layouts.show')
 
 @section('title', "View Asset: {$asset->machineName}")
-@section('category', 'asset')
-@section('returnPage', 'javascript:window.history.back();')
+@section('category', 'assets')
 
 @section('tab-items')
     <li class="nav-item">
@@ -11,7 +10,7 @@
     </li>
     <li class="nav-item">
         <a class="nav-link" id="vendor-tab" data-toggle="tab" href="#vendor" role="tab" aria-controls="vendor"
-           aria-selected="true">Call Maintance</a>
+           aria-selected="true">Call Maintenance</a>
     </li>
 @endsection
 

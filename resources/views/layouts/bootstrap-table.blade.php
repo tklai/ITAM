@@ -20,10 +20,10 @@
 
     window.actionEvents = {
         'click #detail': function (e, value, row) {
-            window.location.assign(`/admin/@yield('category')/${row['id']}/detail`);
+            window.location.assign(`/@yield('category')/${row['id']}`);
         },
         'click #edit': function (e, value, row) {
-            window.location.assign(`/admin/@yield('category')/${row['id']}/edit`);
+            window.location.assign(`/@yield('category')/${row['id']}/edit`);
         },
         {{-- Delete button event (DISABLED)
         'click #delete': function (e, value, row) {

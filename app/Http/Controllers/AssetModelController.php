@@ -2,33 +2,84 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\AssetModelRequest;
 use App\Asset;
 use App\AssetModel;
 use App\Category;
-use App\Http\Requests\AssetModelRequest;
 
 class AssetModelController extends Controller
 {
 
-    public function getList() {
-        return AssetModel::with('category')->get();
+    /**
+     * Display an index page of Asset Model Management.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index()
+    {
+        return view('models.index');
     }
 
-    public function getAdd() {
+    /**
+     * Display a listing of the models.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function list()
+    {
+        $assetModels = AssetModel::with('category')->get();
+        return $assetModels;
+    }
+
+    /**
+     * Show the form for creating a new model.
+     *
+     * @return \Illuminate\View\View|\Illuminate\Database\Eloquent\Collection
+     */
+    public function create()
+    {
         $categories = Category::all();
-        return view('admin.model.add')
+        return view('models.create')
             ->with('categories', $categories);
     }
 
-    public function getDetail($id = null) {
-        $model = AssetModel::find($id);
-        return view('admin.model.detail')
+    /**
+     * Store a newly created model in storage.
+     *
+     * @param  \App\Http\Requests\AssetModelRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(AssetModelRequest $request)
+    {
+        AssetModel::create([
+            'name' => $request->input('name'),
+            'category_id' => $request->input('category_id'),
+            'details' => $request->input('details')
+        ]);
+        return redirect()->route('models.index');
+    }
+
+    /**
+     * Display the specified model.
+     *
+     * @param  int $id
+     * @return \Illuminate\View\View|\Illuminate\Database\Eloquent\Collection
+     */
+    public function show($id)
+    {
+        $model = AssetModel::findOrFail($id);
+        return view('models.show')
             ->with('model', $model);
     }
 
-    public function getDetailList($id = null) {
-        $this->checkNull($id, 'model');
+    /**
+     * Display a listing of the assets that related to this asset model.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function assetsList($id = null)
+    {
+        $this->checkNull($id, 'models');
         return Asset::with('assetModel')
             ->with('vendor')
             ->with('location')
@@ -36,36 +87,49 @@ class AssetModelController extends Controller
             ->get();
     }
 
-    public function postAdd(AssetModelRequest $request) {
-        AssetModel::create([
-            'name'        => $request->input('name'),
-            'category_id' => $request->input('category_id'),
-            'details'     => $request->input('details')
-        ]);
-        return redirect()->route( 'model.index');
-    }
-
-    public function getEdit($id = null) {
-        $this->checkNull($id, 'model');
-        $model      = AssetModel::find($id);
+    /**
+     * Show the form for editing the specified model.
+     *
+     * @param  int $assetModel
+     * @return \Illuminate\View\View|\Illuminate\Database\Eloquent\Collection
+     */
+    public function edit($assetModel)
+    {
+        $this->checkNull($assetModel, 'models');
+        $model = AssetModel::findOrFail($assetModel);
         $categories = Category::all();
-        return view('admin.model.edit')
+        return view('models.edit')
             ->with('model', $model)
             ->with('categories', $categories);
     }
 
-    public function putUpdate(AssetModelRequest $request, $id = null) {
-        $this->checkNull($id, 'model');
-        AssetModel::find($id)->update([
-            'name'        => $request->input('name'),
+    /**
+     * Update the specified model in storage.
+     *
+     * @param  \App\Http\Requests\AssetModelRequest $request
+     * @param  int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(AssetModelRequest $request, $id)
+    {
+        $this->checkNull($id, 'models');
+        AssetModel::findOrFail($id)->update([
+            'name' => $request->input('name'),
             'category_id' => $request->input('category_id'),
-            'details'     => $request->input('details')
+            'details' => $request->input('details')
         ]);
-        return redirect()->route('model.index');
+        return redirect()->route('models.index');
     }
 
-    public function postDelete($id = null) {
-        $this->checkNull($id, 'model');
+    /**
+     * Remove the specified model from storage.
+     *
+     * @param  int $id
+     * @return null
+     */
+    public function destroy($id)
+    {
+        $this->checkNull($id, 'models');
         AssetModel::destroy($id);
         return;
     }

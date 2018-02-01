@@ -1,7 +1,7 @@
 @extends('layouts.list')
 
 @section('title', 'Orders')
-@section('category', 'order')
+@section('category', 'orders')
 
 @section('table')
     <table class="table" id="orderList"
