@@ -51,12 +51,16 @@ class AssetModelController extends Controller
      */
     public function store(AssetModelRequest $request)
     {
-        AssetModel::create([
+        $model = AssetModel::create([
             'name' => $request->input('name'),
             'category_id' => $request->input('category_id'),
             'details' => $request->input('details')
         ]);
-        return redirect()->route('models.index');
+        if ($request->ajax()) {
+            return $model;
+        } else {
+            return redirect()->route('models.index');
+        }
     }
 
     /**

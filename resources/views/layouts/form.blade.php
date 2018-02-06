@@ -1,5 +1,14 @@
 @extends('layouts.master')
 
+@section('style')
+    <link rel="stylesheet" href="{{ asset('assets/css/selectize.default.css') }}">
+@endsection
+
+@section('javascript')
+    <script src="{{ asset('assets/js/selectize.min.js') }}"></script>
+    @yield('additionalJS')
+@endsection
+
 @section('actionButtons')
     <a class="btn btn-outline-dark mr-3" href="javascript:window.history.back();">
         <span class="fa fa-chevron-left"></span>
@@ -25,4 +34,5 @@
             </button>
         </div>
     </div>
+    @yield('modals')
 @endsection

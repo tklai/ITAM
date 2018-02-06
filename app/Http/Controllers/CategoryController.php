@@ -17,12 +17,12 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|unique|max:255',
+            'name' => 'required|max:255|unique:categories,name',
         ]);
 
-        Category::create([
+        $category = Category::create([
             'name' => $request->name,
         ]);
-        return;
+        return $category;
     }
 }

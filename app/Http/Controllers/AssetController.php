@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AssetRequest;
 use App\Asset;
 use App\AssetModel;
+use App\Category;
 use App\Location;
 use App\Vendor;
 
@@ -42,10 +43,12 @@ class AssetController extends Controller
      */
     public function create()
     {
-        $locations = Location::all();
-        $models    = AssetModel::all();
-        $vendors   = Vendor::all();
+        $categories = Category::all();
+        $locations  = Location::all();
+        $models     = AssetModel::all();
+        $vendors    = Vendor::all();
         return view('assets.create')
+            ->with('categories', $categories)
             ->with('locations', $locations)
             ->with('models', $models)
             ->with('vendors', $vendors);
