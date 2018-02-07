@@ -40,6 +40,10 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::group(['middleware' => 'auth'], function () {
     Route::post('categories', 'CategoryController@store')->name('categories.store');
+    Route::get('assets/{id}/maintenance/create', 'MaintenanceController@create')->name('maintenances.create');
+    Route::post('assets/{id}/maintenance', 'MaintenanceController@store')->name('maintenances.store');
+    Route::get('assets/{id}/maintenance/{maintenance_id}/edit', 'MaintenanceController@edit')->name('maintenances.edit');
+    Route::put('assets/{id}/maintenance/{maintenance_id}', 'MaintenanceController@update')->name('maintenances.update');
 });
 
 // Bootstrap-Table list
@@ -47,12 +51,14 @@ Route::group(['middleware' => 'auth', 'prefix' => '/list'], function () {
     Route::get('assets', 'AssetController@list')->name('assets.list');
     Route::get('departments', 'DepartmentController@list')->name('departments.list');
     Route::get('locations', 'LocationController@list')->name('locations.list');
+    Route::get('maintenances', 'MaintenanceController@list')->name('maintenances.list');
     Route::get('models', 'AssetModelController@list')->name('models.list');
     Route::get('vendors', 'VendorController@list')->name('vendors.list');
 });
 
 // Assets list
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('/assets/{id}/maintenances', 'MaintenanceController@maintenanceList')->name('assets.maintenances');
     Route::get('/departments/{id}/assets', 'DepartmentController@assetsList')->name('departments.assets');
     Route::get('/locations/{id}/assets', 'LocationController@assetsList')->name('locations.assets');
     Route::get('/models/{id}/assets', 'AssetModelController@assetsList')->name('models.assets');

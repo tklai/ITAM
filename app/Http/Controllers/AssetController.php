@@ -85,6 +85,7 @@ class AssetController extends Controller
     {
         $asset = Asset::with('assetModel')
             ->with('vendor')
+            ->with('maintenance')
             ->with('location')
             ->findOrFail($asset);
         return view('assets.show')->with('asset', $asset);

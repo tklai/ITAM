@@ -19,6 +19,10 @@ class Asset extends Model
         return $this->belongsTo(Location::class);
     }
 
+    public function maintenance() {
+        return $this->belongsTo(Maintenance::class);
+    }
+
     public function vendor() {
         return $this->belongsTo(Vendor::class);
     }
