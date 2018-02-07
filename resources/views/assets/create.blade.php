@@ -111,27 +111,16 @@
 @section('additionalJS')
     <script type="text/javascript">
         $(document).ready(function () {
+            var selectizeCallback = null;
             // Selectize
             $('#input-vendor_id').selectize();
             $('#input-location_id').selectize();
             $('#input-asset_model_id').selectize({
                 create: function (input, callback) {
+                    selectizeCallback = callback;
+                    $('#modal-form-model').trigger('reset');
                     $('#modelModal').modal('show');
                     $('#modal-input-name').val(input);
-                    $('#modal-form-model').on("submit", function(event) {
-                        event.preventDefault();
-                        $.ajax({
-                            url: '/models',
-                            type: 'POST',
-                            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                            data: $(this).serialize(),
-                            success: function(response) {
-                                callback({value: response.id, text: response.name});
-                                $('#modelModal').modal('hide');
-                            },
-                            error: function(error) {alert(error.responseJSON.message);}
-                        });
-                    });
                 }
             });
             $('#modal-input-category_id').selectize({
@@ -146,6 +135,29 @@
                         error: function (error) {alert(error.responseJSON.message);}
                     });
                 }
+            });
+
+            $("#modelModal").on('hide.bs.modal', function() {
+                if (selectizeCallback != null) {
+                    selectizeCallback();
+                    selectizeCallback = null;
+                }
+            });
+
+            $('#modal-form-model').on("submit", function(event) {
+                event.preventDefault();
+                $.ajax({
+                    url: '/models',
+                    type: 'POST',
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        selectizeCallback({value: response.id, text: response.name});
+                        selectizeCallback = null;
+                        $('#modelModal').modal('toggle');
+                    },
+                    error: function(error) {alert(error.responseJSON.message);}
+                });
             });
         });
     </script>
