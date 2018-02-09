@@ -3,6 +3,7 @@
 @section('title', 'Add Location')
 @section('category', 'locations')
 @section('actionPage', route('locations.store'))
+@section('returnPage', route('locations.index'))
 
 @section('form')
     <div class="form-group">

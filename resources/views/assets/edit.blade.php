@@ -3,6 +3,7 @@
 @section('title', "Edit asset: {$asset->machineName}")
 @section('category', 'assets')
 @section('actionPage', route('assets.update', ['id' => $asset->id]))
+@section('returnPage', route('assets.index'))
 
 @section('form')
     {{ method_field('PUT') }}
@@ -65,7 +66,7 @@
     </div>
     <div class="form-group">
         <label class="control-label" for="input-remarks">Remarks</label>
-        <input type="text" class="form-control" id="input-remarks" name="remarks"
-               value="{{ old('remarks', $asset->remarks) }}">
+        <textarea class="form-control" id="input-remarks"
+                  name="remarks" rows="5">{{ old('remarks', $asset->remarks) }}</textarea>
     </div>
 @endsection

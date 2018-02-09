@@ -3,6 +3,7 @@
 @section('title', "Edit Location: {$location->room_number}")
 @section('category', 'locations')
 @section('actionPage', route('locations.update', ['id' => $location->id]))
+@section('returnPage', route('locations.index'))
 
 @section('form')
     {{ method_field('PUT') }}

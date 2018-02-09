@@ -3,6 +3,7 @@
 @section('title', 'Add asset')
 @section('category', 'assets')
 @section('actionPage', route('assets.store'))
+@section('returnPage', route('assets.index'))
 
 @section('form')
     <div class="form-group">
@@ -59,7 +60,7 @@
     </div>
     <div class="form-group">
         <label class="control-label" for="input-remarks">Remarks</label>
-        <input type="text" class="form-control" id="input-remarks" name="remarks" value="{{ old('remarks') }}">
+        <textarea class="form-control" id="input-remarks" name="remarks" rows="5">{{ old('remarks') }}</textarea>
     </div>
 @endsection
 

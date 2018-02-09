@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Asset extends Model
 {
+
     protected $fillable = [
         'machineName', 'asset_model_id', 'serialNumber', 'vendor_id',
         'orderDate', 'warrantyExpiryDate', 'location_id', 'remarks'
@@ -26,4 +27,5 @@ class Asset extends Model
     public function vendor() {
         return $this->belongsTo(Vendor::class);
     }
+
 }

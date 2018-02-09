@@ -76,6 +76,7 @@ class LocationController extends Controller
     {
         $this->checkNull($id, 'locations');
         return Asset::where('location_id', $id)
+            ->with('assetModel')
             ->with('location')
             ->with('vendor')
             ->get();

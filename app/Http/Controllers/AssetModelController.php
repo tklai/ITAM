@@ -54,7 +54,7 @@ class AssetModelController extends Controller
         $model = AssetModel::create([
             'name' => $request->input('name'),
             'category_id' => $request->input('category_id'),
-            'details' => $request->input('details')
+            'details' => nl2br($request->input('details'))
         ]);
         if ($request->ajax()) {
             return $model;
@@ -84,11 +84,14 @@ class AssetModelController extends Controller
     public function assetsList($id = null)
     {
         $this->checkNull($id, 'models');
-        return Asset::with('assetModel')
-            ->with('vendor')
-            ->with('location')
+        return Asset::join('vendors', 'vendors.id', 'assets.vendor_id')
             ->where('asset_model_id', $id)
+            ->with(['assetModel:id,name', 'location:id,room_number'])
             ->get();
+        // return Asset::where('asset_model_id', $id)
+        //    ->with(['assetModel:id,name', 'vendor:id,name', 'location:id,room_number'])
+        //    ->get();
+
     }
 
     /**
@@ -101,6 +104,7 @@ class AssetModelController extends Controller
     {
         $this->checkNull($assetModel, 'models');
         $model = AssetModel::findOrFail($assetModel);
+        $model->details = $this->br2nl($model->details);
         $categories = Category::all();
         return view('models.edit')
             ->with('model', $model)
@@ -120,7 +124,7 @@ class AssetModelController extends Controller
         AssetModel::findOrFail($id)->update([
             'name' => $request->input('name'),
             'category_id' => $request->input('category_id'),
-            'details' => $request->input('details')
+            'details' => nl2br($request->input('details'))
         ]);
         return redirect()->route('models.index');
     }

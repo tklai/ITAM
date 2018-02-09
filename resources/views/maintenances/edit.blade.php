@@ -3,6 +3,7 @@
 @section('title', 'Edit maintenance call: '.$maintenance->call_number)
 @section('category', 'maintenances')
 @section('actionPage', route('maintenances.update', ['id' => $maintenance->asset_id, 'maintenance_id' => $maintenance->id]))
+@section('returnPage', 'javascript:window.history.back();')
 
 @section('form')
     {{ method_field('PUT') }}

@@ -2,4 +2,8 @@
 
 @section('title', 'Error')
 
-@section('contents', 'Whoops, looks like something went wrong. Please choose another option.')
+@section('contents')
+    <div class="alert alert-danger">
+        Whoops, looks like something went wrong. Please choose another option.
+    </div>
+@endsection

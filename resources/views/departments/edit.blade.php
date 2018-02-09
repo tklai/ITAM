@@ -3,6 +3,7 @@
 @section('title', "Edit Department: {$department->name}")
 @section('category', 'departments')
 @section('actionPage', route('departments.update', ['id' => $department->id]))
+@section('returnPage', route('departments.index'))
 
 @section('form')
     {{ method_field('PUT') }}

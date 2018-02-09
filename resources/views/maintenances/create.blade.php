@@ -3,6 +3,7 @@
 @section('title', 'Create new maintenance')
 @section('category', 'maintenances')
 @section('actionPage', route('maintenances.store', ['id' => $asset->id]))
+@section('returnPage', 'javascript:window.history.back();')
 
 @section('form')
     <div class="alert alert-info" role="alert">

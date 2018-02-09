@@ -953,9 +953,13 @@ boom@5.x.x:
   dependencies:
     hoek "4.x.x"
 
-"bootstrap-table@git+https://github.com/wenzhixin/bootstrap-table.git":
+bootstrap-table@^1.11.2:
+  version "1.11.2"
+  resolved "https://registry.yarnpkg.com/bootstrap-table/-/bootstrap-table-1.11.2.tgz#5f5f8414c97d95a40e56d3d364523da432b3c0b1"
+
+"bootstrap-table@https://github.com/wenzhixin/bootstrap-table.git#503aaae":
   version "1.11.1"
-  resolved "git+https://github.com/wenzhixin/bootstrap-table.git#503aaae0e6a562b97728b039e3905d80a4623dca"
+  resolved "https://github.com/wenzhixin/bootstrap-table.git#503aaae0e6a562b97728b039e3905d80a4623dca"
 
 bootstrap@^4.0.0:
   version "4.0.0"

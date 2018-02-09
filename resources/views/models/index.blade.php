@@ -10,14 +10,18 @@
            data-url="{{ route('models.list') }}"
            data-id-field="id"
            data-sort-name="id"
+           data-search="true"
+           data-toolbar="#toolbar"
+           data-pagination="true"
+           data-pagination-v-align="both"
+           data-page-list="[25, 50, ALL]"
            data-mobile-responsive="true"
     >
         <thead>
         <tr>
-            <th data-field="checkbox" data-checkbox="true">Checkbox</th>
-            <th data-field="name" data-sortable="true">Model Name</th>
+            <th data-field="name" data-sortable="true" data-formatter="modelDetail">Model Name</th>
             <th data-field="category.name" data-sortable="true">Machine Type</th>
-            <th data-field="details" data-sortable="true">Detail Information</th>
+            <th data-field="details" data-sortable="true" data-visible="false">Detail Information</th>
             <th data-field="actions" data-sortable="false" data-formatter="addActions" data-events="actionEvents"
                 data-searchable="false">
                 Actions

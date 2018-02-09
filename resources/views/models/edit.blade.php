@@ -3,6 +3,7 @@
 @section('title', "Edit model: {$model->name}")
 @section('category', 'models')
 @section('actionPage', route('models.update', ['id' => $model->id]))
+@section('returnPage', route('models.index'))
 
 @section('form')
     {{ method_field('PUT') }}
@@ -23,6 +24,6 @@
     </div>
     <div class="form-group">
         <label class="control-label" for="input-details">Details</label>
-        <input type="text" class="form-control" id="input-details" name="details" value="{{old('details', $model->details) }}">
+        <textarea class="form-control" id="input-details" name="details" rows="5">{{old('details', $model->details) }}</textarea>
     </div>
 @endsection

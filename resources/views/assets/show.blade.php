@@ -2,6 +2,8 @@
 
 @section('title', "View Asset: {$asset->machineName}")
 @section('category', 'assets')
+@section('editPage', route('assets.edit', ['id' => $asset->id]))
+@section('returnPage', route('assets.index'))
 
 @section('tab-items')
     <li class="nav-item">
@@ -41,6 +43,10 @@
                 <tr>
                     <td>Location</td>
                     <td>{{ $asset->location->description }} {{ $asset->location->room_number }}</td>
+                </tr>
+                <tr>
+                    <td class="align-top">Remarks</td>
+                    <td>{!! $asset->remarks !!}</td>
                 </tr>
             </table>
         </div>

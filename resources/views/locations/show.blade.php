@@ -2,6 +2,7 @@
 
 @section('title', "View Location: {$location->room_number}")
 @section('category', 'locations')
+@section('returnPage', route('locations.index'))
 
 @section('tab-items')
     <li class="nav-item">
@@ -45,9 +46,9 @@
                 <thead>
                 <tr>
                     <th data-field="machineName" data-sortable="true">Name</th>
-                    <th data-field="asset_model.name" data-sortable="true" data-visible="false">Model</th>
+                    <th data-field="asset_model.name" data-sortable="true" data-formatter="modelDetail">Model</th>
                     <th data-field="serialNumber" data-sortable="true">Serial No.</th>
-                    <th data-field="vendor.name" data-sortable="true">Vendor</th>
+                    <th data-field="vendor.name" data-sortable="true" data-formatter="vendorDetail">Vendor</th>
                     <th data-field="orderDate" data-sortable="true" data-visible="false">Order Date</th>
                     <th data-field="warrantyExpiryDate" data-sortable="true" data-visible="false"
                         data-cell-style="warrantyCell">Warranty

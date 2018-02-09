@@ -3,6 +3,7 @@
 @section('title', 'Edit Order: '.$order->orderNumber)
 @section('category', 'orders')
 @section('actionPage', route('orders.update'))
+@section('returnPage', route('orders.index'))
 
 @section('form')
     {{ method_field('PUT') }}

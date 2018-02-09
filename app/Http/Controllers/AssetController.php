@@ -70,7 +70,7 @@ class AssetController extends Controller
             'orderDate'          => $request->input('orderDate'),
             'warrantyExpiryDate' => $request->input('warrantyExpiryDate'),
             'location_id'        => $request->input('location_id'),
-            'remarks'            => $request->input('remarks'),
+            'remarks'            => nl2br($request->input('remarks')),
         ]);
         return redirect()->route( 'assets.index');
     }
@@ -117,6 +117,7 @@ class AssetController extends Controller
     {
         $this->checkNull($asset, 'assets');
         $asset     = Asset::findOrFail($asset);
+        $asset->remarks = $this->br2nl($asset->remarks);
         $locations = Location::all();
         $models    = AssetModel::all();
         $vendors   = Vendor::all();
@@ -145,7 +146,7 @@ class AssetController extends Controller
             'orderDate'          => $request->input('orderDate'),
             'warrantyExpiryDate' => $request->input('warrantyExpiryDate'),
             'location_id'        => $request->input('location_id'),
-            'remarks'            => $request->input('remarks'),
+            'remarks'            => nl2br($request->input('remarks')),
         ]);
         return redirect()->route('assets.index');
     }
