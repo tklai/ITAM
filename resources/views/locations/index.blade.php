@@ -10,6 +10,7 @@
            data-url="{{ route('locations.list') }}"
            data-id-field="id"
            data-sort-name="room_number"
+           data-toolbar="#toolbar"
            data-mobile-responsive="true"
     >
         <thead>

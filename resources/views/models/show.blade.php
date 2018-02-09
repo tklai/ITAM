@@ -45,7 +45,6 @@
                    data-group-by-field="name"
                    data-search="true"
                    data-show-columns="true"
-                   data-toolbar="#toolbar"
                    data-mobile-responsive="true"
                    data-pagination="true"
                    data-pagination-v-align="both"

@@ -10,6 +10,7 @@
            data-id-field="id"
            data-sort-name="deliveryDate"
            data-sort-order="desc"
+           data-toolbar="#toolbar"
            data-mobile-responsive="true"
     >
         <thead>

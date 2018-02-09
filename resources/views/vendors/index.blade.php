@@ -10,6 +10,7 @@
            data-url="{{ route('vendors.list') }}"
            data-id-field="id"
            data-sort-name="name"
+           data-toolbar="#toolbar"
            data-mobile-responsive="true"
     >
         <thead>

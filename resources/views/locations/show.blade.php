@@ -38,7 +38,6 @@
                    data-sort-name="id"
                    data-search="true"
                    data-show-columns="true"
-                   data-toolbar="#toolbar"
                    data-mobile-responsive="true"
                    data-pagination="true"
                    data-pagination-v-align="both"

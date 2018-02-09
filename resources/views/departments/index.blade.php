@@ -10,6 +10,7 @@
            data-url="{{ route('departments.list') }}"
            data-id-field="id"
            data-sort-name="id"
+           data-toolbar="#toolbar"
            data-mobile-responsive="true"
     >
         <thead>
