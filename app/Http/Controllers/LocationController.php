@@ -47,11 +47,15 @@ class LocationController extends Controller
      */
     public function store(LocationRequest $request)
     {
-        Location::create([
+        $location = Location::create([
             'room_number' => $request->input('room_number'),
             'description' => $request->input('description'),
         ]);
-        return redirect()->route( 'locations.index');
+        if ($request->ajax()) {
+            return $location;
+        } else {
+            return redirect()->route('locations.index');
+        }
     }
 
     /**

@@ -19,6 +19,10 @@
             </tr>
             <tr>
                 <td>Serial Number</td>
+                <td>{{ $asset->assetModel->name }}</td>
+            </tr>
+            <tr>
+                <td>Serial Number</td>
                 <td>{{ $asset->serialNumber }}</td>
             </tr>
         </table>

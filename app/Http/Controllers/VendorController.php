@@ -46,12 +46,16 @@ class VendorController extends Controller
      */
     public function store(VendorRequest $request)
     {
-        Vendor::create([
+        $vendor = Vendor::create([
             'name'    => $request->input('name'),
             'address' => $request->input('address'),
             'phone'   => $request->input('phone'),
         ]);
-        return redirect()->route( 'vendors.index');
+        if ($request->ajax()) {
+            return $vendor;
+        } else {
+            return redirect()->route('vendors.index');
+        }
     }
 
     /**

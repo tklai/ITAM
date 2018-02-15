@@ -24,7 +24,7 @@ class AssetRequest extends FormRequest
     public function rules()
     {
         return [
-            "machineName" => "required|max:255|unique:assets,machineName,{$this->id}",
+            "machineName" => "required|max:255",
             "asset_model_id" => "required",
             "serialNumber" => "required|max:255|unique:assets,serialNumber,{$this->id}",
             "vendor_id" => "required",

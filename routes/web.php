@@ -28,21 +28,14 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 // Admin Dashboard
 Route::get('/', 'AdminController@index')->name('dashbaord');
 
-// Asset Management
 // QR
 Route::group(['middleware' => 'auth'], function () {
-    Route::resource('assets', 'AssetController');
-    Route::resource('departments', 'DepartmentController');
-    Route::resource('locations', 'LocationController');
-    Route::resource('models', 'AssetModelController');
-    Route::resource('orders', 'OrderController');
-    Route::resource('vendors', 'VendorController');
     Route::get('assets/barcode', 'AssetController@getBarcode')->name('assets.barcode');
     Route::get('assets/{id}/landing', 'AssetController@landing')->name('assets.landing');
 });
 
+// Maintenance
 Route::group(['middleware' => 'auth'], function () {
-    Route::post('categories', 'CategoryController@store')->name('categories.store');
     Route::get('assets/{id}/maintenance/create', 'MaintenanceController@create')->name('maintenances.create');
     Route::post('assets/{id}/maintenance', 'MaintenanceController@store')->name('maintenances.store');
     Route::get('assets/{id}/maintenance/{maintenance_id}/edit', 'MaintenanceController@edit')->name('maintenances.edit');
@@ -67,4 +60,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/models/{id}/assets', 'AssetModelController@assetsList')->name('models.assets');
     Route::get('/orders/{id}/assets', 'OrderController@assetsList')->name('orders.assets');
     Route::get('/vendors/{id}/assets', 'VendorController@assetsList')->name('vendors.assets');
+});
+
+// Managements
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('assets', 'AssetController');
+    Route::resource('departments', 'DepartmentController');
+    Route::resource('locations', 'LocationController');
+    Route::resource('models', 'AssetModelController');
+    Route::resource('orders', 'OrderController');
+    Route::resource('vendors', 'VendorController');
+    Route::post('categories', 'CategoryController@store')->name('categories.store');
 });
