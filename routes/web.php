@@ -29,6 +29,7 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/', 'AdminController@index')->name('dashbaord');
 
 // Asset Management
+// QR
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('assets', 'AssetController');
     Route::resource('departments', 'DepartmentController');
@@ -36,6 +37,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('models', 'AssetModelController');
     Route::resource('orders', 'OrderController');
     Route::resource('vendors', 'VendorController');
+    Route::get('assets/barcode', 'AssetController@getBarcode')->name('assets.barcode');
+    Route::get('assets/{id}/landing', 'AssetController@landing')->name('assets.landing');
 });
 
 Route::group(['middleware' => 'auth'], function () {

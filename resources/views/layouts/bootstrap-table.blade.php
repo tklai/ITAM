@@ -101,5 +101,29 @@
                     return {};
             }
         }
+
+        function getBarcode() {
+            var selectedIDs = $.map($('.table').bootstrapTable('getSelections'), function (row) {
+                return row.id;
+            });
+            $.ajax({
+                url: '{{ route('assets.barcode') }}',
+                type: 'GET',
+                data: {id: selectedIDs},
+                beforeSend: function () {
+                    if (selectedIDs.length === 0) {
+                        alert('You didn\'t select any assets.');
+                        return false;
+                    }
+                },
+                success: function(data) {
+                    document.write(data);
+                },
+                error: function(error) {
+                    alert('Something went wrong. Please check web console and contact administrator.');
+                    console.error(error.responseJSON.message);
+                }
+            });
+        }
     @endif
 </script>

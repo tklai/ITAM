@@ -15,6 +15,11 @@
         <a class="btn btn-primary" href="@yield('createPage')" aria-label="create">
             <span class="fa fa-plus"></span> Add
         </a>
+        @if(Route::currentRouteName() === 'assets.index')
+        <button type="button" class="btn btn-info" onClick="getBarcode()" aria-label="create">
+            <span class="fa fa-barcode"></span> Barcode
+        </button>
+        @endif
         {{--<a class="btn btn-danger" href="" aria-label="delete">--}}
             {{--<span class="fa fa-trash"></span> Delete--}}
         {{--</a>--}}
