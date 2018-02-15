@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\AssetRequest;
 use App\Asset;
 use App\AssetModel;
@@ -162,5 +163,31 @@ class AssetController extends Controller
         $this->checkNull($asset, 'assets');
         Asset::destroy($asset);
         return null;
+    }
+
+    public function getBarcode(Request $request)
+    {
+        $recievedIDs = $request->get('id');
+        foreach ($recievedIDs as $id) {
+            $data = Asset::with('assetModel')->findOrFail($id);
+            $result = new \StdClass();
+            $result->id = $data->id;
+            $result->serialNumber = $data->serialNumber;
+            $result->machineName = $data->machineName;
+            $result->modelName = $data->assetModel->name;
+            $barcodes[] = $result;
+        }
+        return view('assets.barcode')
+            ->with('barcodes', $barcodes);
+    }
+
+    public function landing($asset)
+    {
+        $asset = Asset::with('assetModel')
+            ->with('vendor')
+            ->with('maintenance')
+            ->with('location')
+            ->findOrFail($asset);
+        return view('assets.landing')->with('result', $asset);
     }
 }
