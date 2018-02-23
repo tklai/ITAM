@@ -30,11 +30,18 @@ class AssetController extends Controller
      */
     public function list()
     {
+        $keyword = '%' . $_GET['search'] . '%';
+        $total = Asset::count();
         $assets = Asset::with('assetModel')
             ->with('vendor')
             ->with('location')
+            ->where('serialNumber', 'like', $keyword)
+            ->skip($_GET['offset'])
+            ->take($_GET['limit'])
             ->get();
-        return $assets;
+        $result['total'] = $total;
+        $result['rows'] = $assets;
+        return json_encode($result);
     }
 
     /**
