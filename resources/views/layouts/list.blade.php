@@ -16,9 +16,12 @@
             <span class="fa fa-plus"></span> Add
         </a>
         @if(Route::currentRouteName() === 'assets.index')
-        <button type="button" class="btn btn-info" onClick="getBarcode()" aria-label="create">
-            <span class="fa fa-barcode"></span> Barcode
-        </button>
+            <button type="button" class="btn btn-info" onClick="getBarcode()" aria-label="barcode">
+                <span class="fa fa-barcode"></span> Barcode
+            </button>
+            <a class="btn btn-warning" href="{{ route('assets.import.index') }}" aria-label="import">
+                <span class="fa fa-upload"></span> Import
+            </a>
         @endif
         {{--<a class="btn btn-danger" href="" aria-label="delete">--}}
             {{--<span class="fa fa-trash"></span> Delete--}}
