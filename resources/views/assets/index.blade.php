@@ -17,7 +17,7 @@
            data-side-pagination="server"
            data-pagination="true"
            data-pagination-v-align="both"
-           data-page-list="[25, 50, ALL]"
+           data-page-list="[10, 25, 50, ALL]"
     >
         <thead>
         <tr>

@@ -32,6 +32,8 @@
             <button type="submit" class="btn btn-primary" form="form-@yield('category')">
                 @if(strpos(Route::currentRouteName(), 'create'))
                     <span class="fa fa-plus"></span> Create
+                @elseif(strpos(Route::currentRouteName(), 'import'))
+                    <span class="fa fa-upload"></span> Import
                 @else
                     <span class="fa fa-pencil"></span> Edit
                 @endif

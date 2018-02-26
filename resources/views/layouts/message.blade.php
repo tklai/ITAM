@@ -1,4 +1,10 @@
-@if (count($errors))
+@if(Session::has('success'))
+    <div class="alert alert-success" role="alert">
+        <span class="fa fa-check-circle"></span> {{ Session::get('success') }}
+    </div>
+@endif
+
+@if(count($errors))
     <div class="alert alert-danger" role="alert">
         <span class="fa fa-times-circle"></span> The following problems occurred:<p>
         <ul>

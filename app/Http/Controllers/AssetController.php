@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use App\Http\Requests\AssetRequest;
 use App\Asset;
 use App\AssetModel;
 use App\Category;
 use App\Location;
 use App\Vendor;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AssetController extends Controller
 {
@@ -196,5 +198,41 @@ class AssetController extends Controller
             ->with('location')
             ->findOrFail($asset);
         return view('assets.landing')->with('result', $asset);
+    }
+
+    public function getImport()
+    {
+        return view('assets.import');
+    }
+
+    public function postImport(Request $request)
+    {
+        if(!$request->hasFile('excel_file')) {
+            return 'File not found';
+        } else {
+            $file = $request->file('excel_file');
+            Excel::selectSheetsByIndex(0)->load($file, function ($reader) {
+                $reader->formatDates(true, 'Y-m-d');
+                $data = $reader->get();
+                foreach ($data as $row) {
+                    $vendor = Vendor::firstOrCreate(['name' => $row['vendor']]);
+                    $location = Location::firstOrCreate(['room_number' => $row['loc']]);
+                    $category = Category::firstOrCreate(['name' => $row['type']]);
+                    $model = AssetModel::firstOrCreate(['name' => $row['model']], ['category_id' => $category->id]);
+                    $asset = Asset::create([
+                        'machineName'        => $row['name'],
+                        'asset_model_id'     => $model->id,
+                        'serialNumber'       => $row['serial_no.'],
+                        'vendor_id'          => $vendor->id,
+                        'orderDate'          => $row['date'],
+                        'warrantyExpiryDate' => $row['update'],
+                        'location_id'        => $location->id,
+                        'remarks'            => nl2br($row['remark']),
+                    ]);
+                }
+            });
+        }
+        Session::flash('success', 'Import OK!');
+        return redirect()->route('assets.index');
     }
 }

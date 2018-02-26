@@ -29,21 +29,27 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/', 'AdminController@index')->name('dashbaord');
 
 // QR
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('assets/barcode', 'AssetController@getBarcode')->name('assets.barcode');
+    Route::get('assets/{id}/landing', 'AssetController@landing')->name('assets.landing');
+});
+
+// QR
 Route::group(['middleware' => 'auth', 'prefix' => 'assets'], function () {
-    Route::get('barcode', 'AssetController@getBarcode')->name('assets.barcode');
-    Route::get('{id}/landing', 'AssetController@landing')->name('assets.landing');
+    Route::get('import', 'AssetController@getImport')->name('assets.import.index');
+    Route::post('import', 'AssetController@postImport')->name('assets.import');
 });
 
 // Maintenance
-Route::group(['middleware' => 'auth', 'prefix' => 'assets'], function () {
-    Route::get('{id}/maintenance/create', 'MaintenanceController@create')->name('maintenances.create');
-    Route::post('{id}/maintenance', 'MaintenanceController@store')->name('maintenances.store');
-    Route::get('{id}/maintenance/{maintenance_id}/edit', 'MaintenanceController@edit')->name('maintenances.edit');
-    Route::put('{id}/maintenance/{maintenance_id}', 'MaintenanceController@update')->name('maintenances.update');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('assets/{id}/maintenance/create', 'MaintenanceController@create')->name('maintenances.create');
+    Route::post('assets/{id}/maintenance', 'MaintenanceController@store')->name('maintenances.store');
+    Route::get('assets/{id}/maintenance/{maintenance_id}/edit', 'MaintenanceController@edit')->name('maintenances.edit');
+    Route::put('assets/{id}/maintenance/{maintenance_id}', 'MaintenanceController@update')->name('maintenances.update');
 });
 
 // Bootstrap-Table list
-Route::group(['middleware' => 'auth', 'prefix' => 'list'], function () {
+Route::group(['middleware' => 'auth', 'prefix' => '/list'], function () {
     Route::get('assets', 'AssetController@list')->name('assets.list');
     Route::get('departments', 'DepartmentController@list')->name('departments.list');
     Route::get('locations', 'LocationController@list')->name('locations.list');
