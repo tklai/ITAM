@@ -27,8 +27,16 @@ class AssetModelController extends Controller
      */
     public function list()
     {
-        $assetModels = AssetModel::with('category')->get();
-        return $assetModels;
+        $keyword = '%' . $_GET['search'] . '%';
+        $total = AssetModel::count();
+        $assetModels = AssetModel::with('category')
+            ->where('name', 'like', $keyword)
+            ->skip($_GET['offset'])
+            ->take($_GET['limit'])
+            ->get();
+        $result['total'] = $total;
+        $result['rows'] = $assetModels;
+        return json_encode($result);
     }
 
     /**
