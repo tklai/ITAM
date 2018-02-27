@@ -79,10 +79,9 @@ class LocationController extends Controller
     public function assetsList($id)
     {
         $this->checkNull($id, 'locations');
-        return Asset::where('location_id', $id)
-            ->with('assetModel')
-            ->with('location')
-            ->with('vendor')
+        return Asset::select('id', 'machineName', 'serialNumber', 'asset_model_id', 'vendor_id')
+            ->where('location_id', $id)
+            ->with('assetModel:id,name', 'location:id,room_number', 'vendor:id,name')
             ->get();
     }
 

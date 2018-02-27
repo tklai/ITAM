@@ -70,7 +70,6 @@
             return `<a href="/assets/${row['id']}">${value}</a>`;
         }
 
-    @if(Route::currentRouteName() === 'assets.index')
         // Format the cell for Asset Management
         function assetModelDetail(value, row) {
             return `<a href="/models/${row['asset_model_id']}">${value}</a>`;
@@ -84,6 +83,7 @@
             return `<a href="/vendors/${row['vendor_id']}">${value}</a>`;
         }
 
+    @if(Route::currentRouteName() === 'assets.index')
         // Format the cell and highlight the asset
         function warrantyCell(value) {
             var warrantyDate = new Date(value);

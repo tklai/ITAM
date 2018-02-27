@@ -57,7 +57,7 @@
                     <th data-field="warrantyExpiryDate" data-sortable="true" data-visible="false"
                         data-cell-style="warrantyCell">Warranty
                     </th>
-                    <th data-field="location.room_number" data-sortable="true" data-formatter="locationDetail">Location</th>
+                    <th data-field="location.room_number" data-sortable="true" data-formatter="assetLocationDetail">Location</th>
                     <th data-field="created_at" data-sortable="true" data-visible="false">Created at</th>
                     <th data-field="updated_at" data-sortable="true" data-visible="false">Updated at</th>
                 </tr>

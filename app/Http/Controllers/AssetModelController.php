@@ -92,14 +92,14 @@ class AssetModelController extends Controller
     public function assetsList($id = null)
     {
         $this->checkNull($id, 'models');
-        return Asset::join('vendors', 'vendors.id', 'assets.vendor_id')
+        return Asset::select('Assets.id', 'Assets.machineName', 'Assets.serialNumber', 'Assets.location_id', 'Vendors.name')
+            ->join('vendors', 'vendors.id', 'assets.vendor_id')
             ->where('asset_model_id', $id)
             ->with(['assetModel:id,name', 'location:id,room_number'])
             ->get();
         // return Asset::where('asset_model_id', $id)
         //    ->with(['assetModel:id,name', 'vendor:id,name', 'location:id,room_number'])
         //    ->get();
-
     }
 
     /**
