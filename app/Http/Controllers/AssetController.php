@@ -34,13 +34,11 @@ class AssetController extends Controller
     {
         $keyword = '%' . $_GET['search'] . '%';
         $total = Asset::count();
-        $assets = Asset::with('assetModel')
-            ->with('vendor')
-            ->with('location')
-            ->where('serialNumber', 'like', $keyword)
-            ->skip($_GET['offset'])
-            ->take($_GET['limit'])
-            ->get();
+        $assets = Asset::with('assetModel', 'location', 'vendor')
+                       ->where('serialNumber', 'like', $keyword)
+                       ->skip($_GET['offset'])
+                       ->take($_GET['limit'])
+                       ->get();
         $result['total'] = $total;
         $result['rows'] = $assets;
         return json_encode($result);
@@ -57,11 +55,12 @@ class AssetController extends Controller
         $locations  = Location::all();
         $models     = AssetModel::all();
         $vendors    = Vendor::all();
-        return view('assets.create')
-            ->with('categories', $categories)
-            ->with('locations', $locations)
-            ->with('models', $models)
-            ->with('vendors', $vendors);
+        return view('assets.create')->with([
+            'categories' => $categories,
+            'locations'=> $locations,
+            'models' => $models,
+            'vendors' => $vendors
+        ]);
     }
 
     /**
@@ -88,16 +87,13 @@ class AssetController extends Controller
     /**
      * Display the specified asset.
      *
-     * @param  int $asset
+     * @param  int $id
      * @return \Illuminate\View\View
      */
-    public function show($asset)
+    public function show($id)
     {
-        $asset = Asset::with('assetModel')
-            ->with('vendor')
-            ->with('maintenance')
-            ->with('location')
-            ->findOrFail($asset);
+        $asset = Asset::with('assetModel', 'location', 'maintenance', 'vendor')
+                      ->findOrFail($id);
         return view('assets.show')->with('asset', $asset);
     }
 
@@ -110,45 +106,44 @@ class AssetController extends Controller
      */
     public function assetsList($id) {
         return null;
-        //$asset = Asset::with('assetModel')
-        //    ->with('vendor')
-        //    ->with('location')
-        //    ->findOrFail($id);
+        //$asset = Asset::with('assetModel', 'location', 'vendor')
+        //              ->findOrFail($id);
         //return view('admin.asset.detail')->with('asset', $asset);
     }
 
     /**
      * Show the form for editing the specified asset.
      *
-     * @param  int $asset
+     * @param  int $id
      * @return \Illuminate\View\View
      */
-    public function edit($asset)
+    public function edit($id)
     {
-        $this->checkNull($asset, 'assets');
-        $asset     = Asset::findOrFail($asset);
+        $this->checkNull($id, 'assets');
+        $asset          = Asset::findOrFail($id);
         $asset->remarks = $this->br2nl($asset->remarks);
-        $locations = Location::all();
-        $models    = AssetModel::all();
-        $vendors   = Vendor::all();
-        return view('assets.edit')
-            ->with('asset', $asset)
-            ->with('locations', $locations)
-            ->with('models', $models)
-            ->with('vendors', $vendors);
+        $locations      = Location::all();
+        $models         = AssetModel::all();
+        $vendors        = Vendor::all();
+        return view('assets.edit')->with([
+            'asset'     => $asset,
+            'locations' => $locations,
+            'models'    => $models,
+            'vendors'   => $vendors
+        ]);
     }
 
     /**
      * Update the specified asset in storage.
      *
      * @param  \App\Http\Requests\AssetRequest $request
-     * @param  int $asset
+     * @param  int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(AssetRequest $request, $asset)
+    public function update(AssetRequest $request, $id)
     {
-        $this->checkNull($asset, 'assets');
-        Asset::findOrFail($asset)->update([
+        $this->checkNull($id, 'assets');
+        Asset::findOrFail($id)->update([
             'machineName'        => $request->input('machineName'),
             'asset_model_id'     => $request->input('asset_model_id'),
             'serialNumber'       => $request->input('serialNumber'),
@@ -164,47 +159,70 @@ class AssetController extends Controller
     /**
      * Remove the specified asset from storage.
      *
-     * @param  int $asset
+     * @param  int $id
      * @return null
      */
-    public function destroy($asset)
+    public function destroy($id)
     {
-        $this->checkNull($asset, 'assets');
-        Asset::destroy($asset);
+        $this->checkNull($id, 'assets');
+        Asset::destroy($id);
         return null;
     }
 
+    /**
+     * Obtain data that have requested from the database.
+     * Return the view with data via ajax call and render it on client-side.
+     *
+     * @param  \Illuminate\Http\Request
+     * @return \Illuminate\View\View
+     */
     public function getBarcode(Request $request)
     {
         $recievedIDs = $request->get('id');
         foreach ($recievedIDs as $id) {
-            $data = Asset::with('assetModel')->findOrFail($id);
+            $data = Asset::select('id', 'asset_model_id', 'machineName', 'serialNumber')
+                         ->with('assetModel:id,name')
+                         ->findOrFail($id);
             $result = new \StdClass();
-            $result->id = $data->id;
+            $result->id           = $data->id;
             $result->serialNumber = $data->serialNumber;
-            $result->machineName = $data->machineName;
-            $result->modelName = $data->assetModel->name;
+            $result->machineName  = $data->machineName;
+            $result->modelName    = $data->assetModel->name;
             $barcodes[] = $result;
         }
         return view('assets.barcode')
             ->with('barcodes', $barcodes);
     }
 
+    /**
+     * Display landing page When the user scanned the qr code.
+     *
+     * @param  Int $asset
+     * @return \Illuminate\View\View
+     */
     public function landing($asset)
     {
-        $asset = Asset::with('assetModel')
-            ->with('vendor')
-            ->with('maintenance')
-            ->with('location')
-            ->findOrFail($asset);
+        $asset = Asset::with('assetModel', 'location', 'maintenance', 'vendor')
+                      ->findOrFail($asset);
         return view('assets.landing')->with('result', $asset);
     }
 
+    /**
+     * Display import page to allow user upload the excel file
+     *
+     * @return \Illuminate\View\View
+     */
     public function getImport()
     {
         return view('assets.import');
     }
 
+    /**
+     * Handle uploaded file and read the excel data and import into database.
+     *
+     * @param  \Illuminate\Http\Request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function postImport(Request $request)
     {
         if(!$request->hasFile('excel_file')) {
@@ -213,13 +231,13 @@ class AssetController extends Controller
             $file = $request->file('excel_file');
             Excel::selectSheetsByIndex(0)->load($file, function ($reader) {
                 $reader->formatDates(true, 'Y-m-d');
-                $data = $reader->get();
-                foreach ($data as $row) {
-                    $vendor = Vendor::firstOrCreate(['name' => $row['vendor']]);
-                    $location = Location::firstOrCreate(['room_number' => $row['loc']]);
+                $rows = $reader->get();
+                foreach ($rows as $row) {
                     $category = Category::firstOrCreate(['name' => $row['type']]);
                     $model = AssetModel::firstOrCreate(['name' => $row['model']], ['category_id' => $category->id]);
-                    $asset = Asset::create([
+                    $location = Location::firstOrCreate(['room_number' => $row['loc']]);
+                    $vendor = Vendor::firstOrCreate(['name' => $row['vendor']]);
+                    Asset::create([
                         'machineName'        => $row['name'],
                         'asset_model_id'     => $model->id,
                         'serialNumber'       => $row['serial_no.'],
@@ -235,4 +253,5 @@ class AssetController extends Controller
         Session::flash('success', 'Import OK!');
         return redirect()->route('assets.index');
     }
+
 }

@@ -24,14 +24,14 @@ class AssetRequest extends FormRequest
     public function rules()
     {
         return [
-            "machineName" => "required|max:255",
-            "asset_model_id" => "required",
-            "serialNumber" => "required|max:255|unique:assets,serialNumber,{$this->id}",
-            "vendor_id" => "required",
-            "orderDate" => "required|before:today",
+            "machineName"        => "required|max:255",
+            "asset_model_id"     => "required",
+            "serialNumber"       => "required|max:255|unique:assets,serialNumber,{$this->id}",
+            "vendor_id"          => "required",
+            "orderDate"          => "required|before:today",
             "warrantyExpiryDate" => "required",
-            "location_id" => "required",
-            "remarks" => "max:255",
+            "location_id"        => "required",
+            "remarks"            => "max:255",
         ];
     }
 }

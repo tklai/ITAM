@@ -67,22 +67,23 @@ class VendorController extends Controller
     public function show($id)
     {
         $vendor = Vendor::findOrFail($id);
-        return view('vendors.show')
-            ->with('vendor', $vendor);
+        return view('vendors.show')->with('vendor', $vendor);
     }
 
     /**
      * Display a listing of the assets that related to this vendor.
      *
+     * @param  int  $id
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function assetsList($id)
     {
         $this->checkNull($id, 'vendors');
-        return Asset::with('assetModel')
-            ->with('location')
-            ->with('vendor')
-            ->where('vendor_id', $id)->get();
+        $assets = Asset::with('assetModel')
+                       ->with('location', 'vendor')
+                       ->where('vendor_id', $id)
+                       ->get();
+        return $assets;
     }
 
     /**
@@ -95,8 +96,7 @@ class VendorController extends Controller
     {
         $this->checkNull($id, 'vendors');
         $vendor = Vendor::findOrFail($id);
-        return view('vendors.edit')
-            ->with('vendor', $vendor);
+        return view('vendors.edit')->with('vendor', $vendor);
     }
 
     /**
@@ -127,6 +127,6 @@ class VendorController extends Controller
     {
         $this->checkNull($id, 'vendors');
         Vendor::destroy($id);
-        return;
+        return null;
     }
 }

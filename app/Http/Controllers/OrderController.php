@@ -37,8 +37,7 @@ class OrderController extends Controller
     public function create()
     {
         $vendors = Vendor::all();
-        return view('orders.create')
-            ->with('vendors', $vendors);
+        return view('orders.create')->with('vendors', $vendors);
     }
 
     /**
@@ -84,9 +83,10 @@ class OrderController extends Controller
         $this->checkNull($id, 'orders');
         $order   = Order::findOrFail($id);
         $vendors = Vendor::all();
-        return view('orders.edit')
-            ->with('order', $order)
-            ->with('vendors', $vendors);
+        return view('orders.edit')->with([
+            'order' => $order,
+            'vendors' => $vendors
+        ]);
     }
 
     /**
@@ -120,6 +120,6 @@ class OrderController extends Controller
     {
         $this->checkNull($id, 'orders');
         Order::destroy($id);
-        return;
+        return null;
     }
 }

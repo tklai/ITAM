@@ -30,10 +30,10 @@ class AssetModelController extends Controller
         $keyword = '%' . $_GET['search'] . '%';
         $total = AssetModel::count();
         $assetModels = AssetModel::with('category')
-            ->where('name', 'like', $keyword)
-            ->skip($_GET['offset'])
-            ->take($_GET['limit'])
-            ->get();
+                                 ->where('name', 'like', $keyword)
+                                 ->skip($_GET['offset'])
+                                 ->take($_GET['limit'])
+                                 ->get();
         $result['total'] = $total;
         $result['rows'] = $assetModels;
         return json_encode($result);
@@ -47,8 +47,7 @@ class AssetModelController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('models.create')
-            ->with('categories', $categories);
+        return view('models.create')->with('categories', $categories);
     }
 
     /**
@@ -60,9 +59,9 @@ class AssetModelController extends Controller
     public function store(AssetModelRequest $request)
     {
         $model = AssetModel::create([
-            'name' => $request->input('name'),
+            'name'        => $request->input('name'),
             'category_id' => $request->input('category_id'),
-            'details' => nl2br($request->input('details'))
+            'details'     => nl2br($request->input('details'))
         ]);
         if ($request->ajax()) {
             return $model;
@@ -80,8 +79,7 @@ class AssetModelController extends Controller
     public function show($id)
     {
         $model = AssetModel::findOrFail($id);
-        return view('models.show')
-            ->with('model', $model);
+        return view('models.show')->with('model', $model);
     }
 
     /**
@@ -114,9 +112,10 @@ class AssetModelController extends Controller
         $model = AssetModel::findOrFail($assetModel);
         $model->details = $this->br2nl($model->details);
         $categories = Category::all();
-        return view('models.edit')
-            ->with('model', $model)
-            ->with('categories', $categories);
+        return view('models.edit')->with([
+            'categories' => $categories,
+            'model' => $model
+        ]);
     }
 
     /**
@@ -130,9 +129,9 @@ class AssetModelController extends Controller
     {
         $this->checkNull($id, 'models');
         AssetModel::findOrFail($id)->update([
-            'name' => $request->input('name'),
+            'name'        => $request->input('name'),
             'category_id' => $request->input('category_id'),
-            'details' => nl2br($request->input('details'))
+            'details'     => nl2br($request->input('details'))
         ]);
         return redirect()->route('models.index');
     }
@@ -147,7 +146,7 @@ class AssetModelController extends Controller
     {
         $this->checkNull($id, 'models');
         AssetModel::destroy($id);
-        return;
+        return null;
     }
 
 }

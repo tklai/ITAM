@@ -15,10 +15,8 @@ class MaintenanceController extends Controller
      */
     public function create($id)
     {
-        $asset = Asset::with('vendor')
-            ->findOrFail($id);
-        return view('maintenances.create')
-            ->with('asset', $asset);
+        $asset = Asset::with('vendor')->findOrFail($id);
+        return view('maintenances.create')->with('asset', $asset);
     }
 
     /**
@@ -49,8 +47,7 @@ class MaintenanceController extends Controller
     {
         $this->checkNull($maintenance_id, 'maintenances');
         $maintenance = Maintenance::findOrFail($maintenance_id);
-        return view('maintenances.edit')
-            ->with('maintenance', $maintenance);
+        return view('maintenances.edit')->with('maintenance', $maintenance);
     }
 
 
@@ -73,10 +70,10 @@ class MaintenanceController extends Controller
     public function maintenanceList($id)
     {
         $this->checkNull($id, 'maintenances');
-        return Maintenance::where('asset_id', $id)
-            ->with('asset')
-            ->with('vendor')
+        $maintenance = Maintenance::where('asset_id', $id)
+            ->with('asset', 'vendor')
             ->get();
+        return $maintenance;
     }
 
 }

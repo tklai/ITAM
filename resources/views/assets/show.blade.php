@@ -68,6 +68,7 @@
                    data-sort-name="place_date"
                    data-search="true"
                    data-show-columns="true"
+                   data-toolbar="#toolbar"
                    data-mobile-responsive="true"
                    data-pagination="true"
                    data-pagination-v-align="both"
