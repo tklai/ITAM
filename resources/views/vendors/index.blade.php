@@ -10,12 +10,12 @@
            data-url="{{ route('vendors.list') }}"
            data-id-field="id"
            data-sort-name="name"
+           data-toolbar="#toolbar"
            data-mobile-responsive="true"
     >
         <thead>
         <tr>
-            <th data-field="checkbox" data-checkbox="true">Checkbox</th>
-            <th data-field="name" data-sortable="true">Name</th>
+            <th data-field="name" data-sortable="true" data-formatter="vendorDetail">Name</th>
             <th data-field="address" data-sortable="true">Address</th>
             <th data-field="phone" data-sortable="false" data-formatter="phoneCall">Phone No.</th>
             <th data-field="actions" data-sortable="false" data-formatter="addActions" data-events="actionEvents"

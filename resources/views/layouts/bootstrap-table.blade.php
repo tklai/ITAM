@@ -2,14 +2,14 @@
     // Add control buttons for list page
     function addActions(value, row) {
         return [
-                '<button id="detail" class="btn btn-info mr-1" aria-label="detail">' +
+                '<button id="edit" class="btn btn-outline-dark mr-1" aria-label="detail">' +
+                    '<span class="fa fa-pencil" data-glyph="pencil"></span> Edit' +
+                '</button>',
+                {{-- Detail button (DISABLED)
+                `<button id="detail" class="btn btn-info mr-1" aria-label="edit">` +
                     '<span class="fa fa-list"></span> ' +
                     '<span class="d-none d-md-inline"> Detail</span>' +
-                '</button>',
-                `<button id="edit" class="btn btn-light mr-1" aria-label="edit">` +
-                    '<span class="fa fa-pencil" data-glyph="pencil"></span>' +
-                    '<span class="d-none d-md-inline"> Edit</span>' +
-                '</button>',
+                '</button>', --}}
                 {{-- Delete button (DISABLED)
                 '<button id="delete" class="btn btn-danger" aria-label="delete">' +
                     '<span class="fa fa-trash"></span> ' +
@@ -19,12 +19,14 @@
     }
 
     window.actionEvents = {
-        'click #detail': function (e, value, row) {
-            window.location.assign(`/@yield('category')/${row['id']}`);
-        },
         'click #edit': function (e, value, row) {
             window.location.assign(`/@yield('category')/${row['id']}/edit`);
         },
+        {{-- Detail button event (DISABLED)
+        'click #detail': function (e, value, row) {
+            window.location.assign(`/@yield('category')/${row['id']}`);
+        },
+        --}}
         {{-- Delete button event (DISABLED)
         'click #delete': function (e, value, row) {
             e.preventDefault();
@@ -48,37 +50,79 @@
         --}}
     };
 
-    // Format the cell and allow user to make call from mobile devices
-    function phoneCall(value) {
-        return `<a href="tel:${value}">${value}</a>`;
-    }
-
-    function modelDetail(value, row) {
-        return `<a href="/models/${row['asset_model_id']}">${value}</a>`;
-    }
-
-    function locationDetail(value, row) {
-        return `<a href="/locations/${row['location_id']}">${value}</a>`;
-    }
-
-    function vendorDetail(value, row) {
-        return `<a href="/vendors/${row['vendor_id']}">${value}</a>`;
-    }
-
-    // Format the cell and highlight the asset that
-    function warrantyCell(value) {
-        var warrantyDate = new Date(value);
-        var today = new Date();
-        var diff = Math.round((warrantyDate - today)/86400000);
-        switch (true) {
-            case (diff < 365 && diff >= 180):
-                return {css: {"background-color": "#daffb3"}};
-            case (diff < 180 && diff >= 90):
-                return {css: {"background-color": "#ffffbb"}};
-            case (diff < 90):
-                return {css: {"background-color": "#ffad99", "color": "white"}};
-            default:
-                return {};
+        function phoneCall(value) {
+            return `<a href="tel:${value}">${value}</a>`;
         }
-    }
+
+        function vendorDetail(value, row) {
+            return `<a href="/vendors/${row['id']}">${value}</a>`;
+        }
+
+        function modelDetail(value, row) {
+            return `<a href="/models/${row['id']}">${value}</a>`;
+        }
+
+        function locationDetail(value, row) {
+            return `<a href="/locations/${row['id']}">${value}</a>`;
+        }
+
+        function assetDetail(value, row) {
+            return `<a href="/assets/${row['id']}">${value}</a>`;
+        }
+
+        // Format the cell for Asset Management
+        function assetModelDetail(value, row) {
+            return `<a href="/models/${row['asset_model_id']}">${value}</a>`;
+        }
+
+        function assetLocationDetail(value, row) {
+            return `<a href="/locations/${row['location_id']}">${value}</a>`;
+        }
+
+        function assetVendorDetail(value, row) {
+            return `<a href="/vendors/${row['vendor_id']}">${value}</a>`;
+        }
+
+    @if(Route::currentRouteName() === 'assets.index')
+        // Format the cell and highlight the asset
+        function warrantyCell(value) {
+            var warrantyDate = new Date(value);
+            var today = new Date();
+            var diff = Math.round((warrantyDate - today)/86400000);
+            switch (true) {
+                case (diff < 365 && diff >= 180):
+                    return {css: {"background-color": "#daffb3"}};
+                case (diff < 180 && diff >= 90):
+                    return {css: {"background-color": "#ffffbb"}};
+                case (diff < 90):
+                    return {css: {"background-color": "#ffad99", "color": "white"}};
+                default:
+                    return {};
+            }
+        }
+
+        function getBarcode() {
+            var selectedIDs = $.map($('.table').bootstrapTable('getSelections'), function (row) {
+                return row.id;
+            });
+            $.ajax({
+                url: '{{ route('assets.barcode') }}',
+                type: 'GET',
+                data: {id: selectedIDs},
+                beforeSend: function () {
+                    if (selectedIDs.length === 0) {
+                        alert('You didn\'t select any assets.');
+                        return false;
+                    }
+                },
+                success: function(data) {
+                    document.write(data);
+                },
+                error: function(error) {
+                    alert('Something went wrong. Please check web console and contact administrator.');
+                    console.error(error.responseJSON.message);
+                }
+            });
+        }
+    @endif
 </script>

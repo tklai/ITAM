@@ -26,4 +26,14 @@ class Controller extends BaseController
         return null;
     }
 
+    /**
+     * Convert nl2br(text) to textarea
+     *
+     * @param string $text
+     * @return string
+     */
+    protected function br2nl($text){
+        return preg_replace('/<br\\s*?\/??>/i','',$text);
+    }
+
 }

@@ -2,6 +2,7 @@
 
 @section('title', 'Departments')
 @section('category', 'departments')
+@section('returnPage', route('departments.index'))
 
 @section('table')
     <table class="table" id="departmentList"

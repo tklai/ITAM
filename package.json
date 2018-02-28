@@ -12,12 +12,13 @@
     "devDependencies": {
         "axios": "^0.17",
         "bootstrap": "^4.0.0",
-        "bootstrap-table": "git+https://github.com/wenzhixin/bootstrap-table.git",
+        "bootstrap-table": "https://github.com/wenzhixin/bootstrap-table.git#503aaae",
         "cross-env": "^5.1",
         "font-awesome": "^4.7.0",
         "jquery": "^3.2",
         "laravel-mix": "^1.0",
         "lodash": "^4.17.4",
-        "popper.js": "^1.12.9"
+        "popper.js": "^1.12",
+        "selectize.js": "^0.12.12"
     }
 }

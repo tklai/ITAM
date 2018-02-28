@@ -47,11 +47,15 @@ class LocationController extends Controller
      */
     public function store(LocationRequest $request)
     {
-        Location::create([
+        $location = Location::create([
             'room_number' => $request->input('room_number'),
             'description' => $request->input('description'),
         ]);
-        return redirect()->route( 'locations.index');
+        if ($request->ajax()) {
+            return $location;
+        } else {
+            return redirect()->route('locations.index');
+        }
     }
 
     /**
@@ -75,10 +79,11 @@ class LocationController extends Controller
     public function assetsList($id)
     {
         $this->checkNull($id, 'locations');
-        return Asset::where('location_id', $id)
-            ->with('location')
-            ->with('vendor')
-            ->get();
+        $assets = Asset::select('id', 'machineName', 'serialNumber', 'asset_model_id', 'vendor_id')
+                       ->where('location_id', $id)
+                       ->with('assetModel:id,name', 'location:id,room_number', 'vendor:id,name')
+                       ->get();
+        return $assets;
     }
 
     /**

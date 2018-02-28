@@ -2,5 +2,7 @@
     "/assets/js/app.js": "/assets/js/app.js",
     "/assets/css/app.css": "/assets/css/app.css",
     "/assets/css/bootstrap-table.css": "/assets/css/bootstrap-table.css",
-    "/assets/js/bootstrap-table.js": "/assets/js/bootstrap-table.js"
+    "/assets/js/bootstrap-table.js": "/assets/js/bootstrap-table.js",
+    "/assets/js/selectize.min.js": "/assets/js/selectize.min.js",
+    "/assets/css/selectize.default.css": "/assets/css/selectize.default.css"
 }

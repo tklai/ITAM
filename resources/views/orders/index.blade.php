@@ -10,11 +10,11 @@
            data-id-field="id"
            data-sort-name="deliveryDate"
            data-sort-order="desc"
+           data-toolbar="#toolbar"
            data-mobile-responsive="true"
     >
         <thead>
         <tr>
-            <th data-field="checkbox" data-checkbox="true">Checkbox</th>
             <th data-field="orderNumber" data-sortable="true" data-visible="true">Order Number</th>
             <th data-field="deliveryDate" data-sortable="true">Delivery Date</th>
             <th data-field="warrantyExpiryDate" data-sortable="true">Exp. Date</th>

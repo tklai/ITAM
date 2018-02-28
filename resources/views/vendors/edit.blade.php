@@ -3,6 +3,7 @@
 @section('title', 'Edit Vendor: '.$vendor->name)
 @section('category', 'vendors')
 @section('actionPage', route('vendors.update', ['id' => $vendor->id]))
+@section('returnPage', route('vendors.index'))
 
 @section('form')
     {{ method_field('PUT') }}

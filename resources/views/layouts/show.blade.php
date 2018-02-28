@@ -14,10 +14,13 @@
         <span class="fa fa-chevron-left"></span>
         <span class="d-none d-sm-inline"> Back</span>
     </a>
+    <a class="btn btn-outline-dark ml-auto order-12" href="@yield('editPage')" aria-label="create">
+        <span class="fa fa-pencil"></span> Edit
+    </a>
 @endsection
 
 @section('contents')
-    <ul class="nav nav-tabs" id="detailTab" role="tablist">
+    <ul class="nav nav-pills mb-2" id="detailTab" role="tablist">
         @yield('tab-items')
     </ul>
 

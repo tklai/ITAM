@@ -24,9 +24,9 @@ class AssetModelRequest extends FormRequest
     public function rules()
     {
         return [
-            "name" => "required|max:255|unique:asset_models,name,{$this->id}",
+            "name"        => "required|max:255|unique:asset_models,name,{$this->id}",
             "category_id" => "required",
-            "details" => "max:255",
+            "details"     => "max:255",
         ];
     }
 }
