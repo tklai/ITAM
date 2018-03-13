@@ -15,8 +15,9 @@ class CreateAuditLogsTable extends Migration
     {
         Schema::create('audit_logs', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('asset_id')->unsigned;
+            $table->integer('asset_id')->unsigned();
             $table->timestamp('audited_on');
+            $table->string('user');
         });
     }
 

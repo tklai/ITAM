@@ -49,8 +49,14 @@
                     <td>{!! $asset->remarks !!}</td>
                 </tr>
                 <tr>
-                    <td class="align-top">Last audited on</td>
-                    <td>{{ $asset->auditLog[0]->audited_on }}</td>
+                    <td>Last audited on</td>
+                    <td>
+                        @if( isset($asset->auditLog[0]) )
+                            {{$asset->auditLog[0]->audited_on}} by {{$asset->auditLog[0]->user}}
+                        @else
+                            Not checked
+                        @endif
+                    </td>
                 </tr>
             </table>
         </div>

@@ -10,7 +10,7 @@ class AuditLog extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'asset_id', 'audit_on'
+        'asset_id', 'audit_on', 'user'
     ];
 
     public function asset()

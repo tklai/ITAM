@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 use App\AuditLog;
 
 class AuditLogController extends Controller
@@ -19,4 +20,15 @@ class AuditLogController extends Controller
         return $audits;
     }
 
+    public function check($id)
+    {
+        $this->checkNull($id, 'audits');
+        AuditLog::create([
+            'asset_id'   => $id,
+            'audited_on' => time(),
+            'user'       => Auth::user()->name
+        ]);
+        Session::flash('Inventory checked.');
+        return redirect()->route('assets.index');
+    }
 }

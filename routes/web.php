@@ -61,6 +61,7 @@ Route::group(['middleware' => 'auth', 'prefix' => '/list'], function () {
 // Audit
 Route::group(['middleware' => 'auth'], function () {
     Route::get('audit', 'AuditLogController@index')->name('audits.index');
+    Route::post('/assets/{id}/audit', 'AuditLogController@check')->name('audits.check');
 });
 
 
