@@ -69,7 +69,6 @@ class MaintenanceController extends Controller
 
     public function maintenanceList($id)
     {
-        $this->checkNull($id, 'maintenances');
         $maintenance = Maintenance::where('asset_id', $id)
             ->with('asset', 'vendor')
             ->get();
