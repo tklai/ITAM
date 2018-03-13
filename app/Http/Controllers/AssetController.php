@@ -57,9 +57,9 @@ class AssetController extends Controller
         $vendors    = Vendor::all();
         return view('assets.create')->with([
             'categories' => $categories,
-            'locations'=> $locations,
-            'models' => $models,
-            'vendors' => $vendors
+            'locations'  => $locations,
+            'models'     => $models,
+            'vendors'    => $vendors
         ]);
     }
 
@@ -92,7 +92,8 @@ class AssetController extends Controller
      */
     public function show($id)
     {
-        $asset = Asset::with('assetModel', 'location', 'maintenance', 'vendor')
+        $asset = Asset::with('assetModel', 'location', 'vendor')
+                      ->with(['auditLog' => function($query) { return $query->orderBy('id', 'DESC')->take(1); }])
                       ->findOrFail($id);
         return view('assets.show')->with('asset', $asset);
     }

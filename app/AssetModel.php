@@ -13,7 +13,8 @@ class AssetModel extends Model
       'name', 'category_id', 'details',
     ];
 
-    public function category() {
+    public function category()
+    {
         return $this->belongsTo(Category::class);
     }
 

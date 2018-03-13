@@ -58,9 +58,17 @@ Route::group(['middleware' => 'auth', 'prefix' => '/list'], function () {
     Route::get('vendors', 'VendorController@list')->name('vendors.list');
 });
 
+// Audit
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('audit', 'AuditLogController@index')->name('audits.index');
+    Route::post('/assets/{id}/audit', 'AuditLogController@check')->name('audits.check');
+});
+
+
 // Assets list
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/assets/{id}/maintenances', 'MaintenanceController@maintenanceList')->name('assets.maintenances');
+    Route::get('/assets/{id}/audits', 'AuditLogController@auditList')->name('assets.audits');
     Route::get('/departments/{id}/assets', 'DepartmentController@assetsList')->name('departments.assets');
     Route::get('/locations/{id}/assets', 'LocationController@assetsList')->name('locations.assets');
     Route::get('/models/{id}/assets', 'AssetModelController@assetsList')->name('models.assets');

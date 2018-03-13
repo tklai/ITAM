@@ -35,10 +35,18 @@
            href="{{ route('assets.edit', ['id' => $result->id]) }}">
             Edit Asset
         </a>
+        <a class="btn btn-warning btn-block"
+           href="#" onclick="document.getElementById('check-form').submit();">
+            Check inventory
+        </a>
         <a class="btn btn-danger btn-block"
            href="{{ route('maintenances.create', ['id' => $result->id]) }}">
             Call for maintenance
         </a>
+
+        <form id="check-form" action="{{ route('audits.check', ['id' => $result->id]) }}" method="POST" style="display: none;">
+            {{ csrf_field() }}
+        </form>
     </div>
 </div>
 @endsection

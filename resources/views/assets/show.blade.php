@@ -48,9 +48,20 @@
                     <td class="align-top">Remarks</td>
                     <td>{!! $asset->remarks !!}</td>
                 </tr>
+                <tr>
+                    <td>Last audited on</td>
+                    <td>
+                        @if( isset($asset->auditLog[0]) )
+                            {{$asset->auditLog[0]->audited_on}} by {{$asset->auditLog[0]->user}}
+                        @else
+                            Not checked
+                        @endif
+                    </td>
+                </tr>
             </table>
         </div>
     </div>
+
     <div class="tab-pane fade" id="maintenance" role="tabpanel" aria-labelledby="maintenance-tab">
         <div id="toolbar">
             <a class="btn btn-primary" href="{{ route('maintenances.create', ['id' => $asset->id]) }}" aria-label="create">
@@ -61,7 +72,7 @@
             {{--</a>--}}
         </div>
         <div class="table-responsive">
-            <table class="table" id="assetsList" data-toggle="table"
+            <table class="table" id="assetsMaintenanceList" data-toggle="table"
                    data-url="{{ route('assets.maintenances', ['id' => $asset->id]) }}"
                    data-id-field="id"
                    data-sort-order="desc"
@@ -93,9 +104,9 @@
             function maintenanceAction(value, row) {
                 return [
                     `<button id="edit" class="btn btn-light mr-1" aria-label="edit">` +
-                    '<span class="fa fa-pencil" data-glyph="pencil"></span>' +
-                    '<span class="d-none d-md-inline"> Edit</span>' +
-                    '</button>'
+                    `<span class="fa fa-pencil" data-glyph="pencil"></span>` +
+                    `<span class="d-none d-md-inline"> Edit</span>` +
+                    `</button>`
                 ].join('');
             }
 
