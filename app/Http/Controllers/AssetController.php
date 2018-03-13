@@ -197,13 +197,13 @@ class AssetController extends Controller
     /**
      * Display landing page When the user scanned the qr code.
      *
-     * @param  Int $asset
+     * @param  Int $id
      * @return \Illuminate\View\View
      */
-    public function landing($asset)
+    public function landing($id)
     {
         $asset = Asset::with('assetModel', 'location', 'maintenance', 'vendor')
-                      ->findOrFail($asset);
+                      ->findOrFail($id);
         return view('assets.landing')->with('result', $asset);
     }
 
