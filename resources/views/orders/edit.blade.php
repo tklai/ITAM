@@ -6,7 +6,7 @@
 @section('returnPage', route('orders.index'))
 
 @section('form')
-    {{ method_field('PUT') }}
+    @method('patch')
     <div class="form-group">
         <label class="control-label" for="input-orderNumber">Order Number *Required</label>
         <input type="text" class="form-control" id="input-orderNumber" name="orderNumber"

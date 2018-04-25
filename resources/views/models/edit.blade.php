@@ -6,7 +6,7 @@
 @section('returnPage', route('models.index'))
 
 @section('form')
-    {{ method_field('PUT') }}
+    @method('patch')
     <input type="hidden" id="input-id" name="id" value="{{ old('id', $model->id) }}">
     <div class="form-group">
         <label class="control-label" for="input-name">Model Name</label>

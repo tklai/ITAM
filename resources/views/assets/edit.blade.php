@@ -6,7 +6,7 @@
 @section('returnPage', route('assets.index'))
 
 @section('form')
-    {{ method_field('PUT') }}
+    @method('patch')
     <input type="hidden" id="input-id" name="id" value="{{ old('id', $asset->id) }}">
     <div class="form-group">
         <label class="control-label" for="input-machineName">Name</label>

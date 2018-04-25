@@ -6,7 +6,7 @@
 @section('returnPage', 'javascript:window.history.back();')
 
 @section('form')
-    {{ method_field('PUT') }}
+    @method('patch')
     <div class="form-group">
         <label class="control-label" for="input-call_number">Call Number *Required</label>
         <input type="text" class="form-control" id="input-call_number" name="call_number"

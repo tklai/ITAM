@@ -26,7 +26,7 @@
         <ul class="d-md-none dropdown-divider"></ul>
         <ul class="navbar-nav ml-auto">
             <!-- Authentication Links -->
-            <a class="nav-item nav-link">User: {{ (Auth::check()) ? Auth::user()->name : 'Direct Access' }}</a>
+            <a class="nav-item nav-link">User: {{ Auth::user()->name ?? 'Direct Access' }}</a>
             <a class="nav-item nav-link" href="#" onclick="document.getElementById('logout-form').submit();">Logout</a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 {{ csrf_field() }}

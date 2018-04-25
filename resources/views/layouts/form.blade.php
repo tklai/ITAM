@@ -21,7 +21,7 @@
     <div class="card">
         <div class="card-body">
             <form class="form form-horizontal" id="form-@yield('category')" method="POST" action="@yield('actionPage')">
-                {{ csrf_field() }}
+                @csrf
                 @yield('form')
             </form>
         </div>

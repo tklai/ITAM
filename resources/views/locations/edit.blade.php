@@ -6,7 +6,7 @@
 @section('returnPage', route('locations.index'))
 
 @section('form')
-    {{ method_field('PUT') }}
+    @method('patch')
     <input type="hidden" id="id" name="id" value="{{ old('id', $location->id) }}">
     <div class="form-group">
         <label class="control-label" for="input-room_number">Room Number</label>
